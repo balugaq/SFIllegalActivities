@@ -62,8 +62,9 @@ public class SFDrugs extends AbstractAddon implements SlimefunAddon {
     	
     	RandomUtils ThisIsSoStupid = new RandomUtils();
 		AddonConfig cfg = this.getConfig();
-		cfg.addDefault("naniteSynthesizer.constraintX", 5000);
-		cfg.addDefault("naniteSynthesizer.constraintZ", 5000);
+		cfg.addDefault("naniteSynthesizer.maxX", 5000);
+		cfg.addDefault("naniteSynthesizer.maxZ", 5000);
+		cfg.save();
 
 		if (Bukkit.getPluginManager().isPluginEnabled("WorldEdit") || Bukkit.getPluginManager().isPluginEnabled("FastAsyncWorldEdit")) {
 			CorporateDimensionBuildings BuildingEvent = new CorporateDimensionBuildings();
