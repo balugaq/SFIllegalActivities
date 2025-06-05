@@ -10,6 +10,7 @@ import java.util.function.BiConsumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -60,29 +61,29 @@ public class SFDrugs extends AbstractAddon implements SlimefunAddon {
     	
     	
     	RandomUtils ThisIsSoStupid = new RandomUtils();
-    	CorporateDimensionBuildings BuildingEvent = new CorporateDimensionBuildings();
-    	
-    	AddonConfig cfg = this.getConfig();
-    	cfg.addDefault("naniteSynthesizer.constraintX", 5000);
-    	cfg.addDefault("naniteSynthesizer.constraintZ", 5000);
-    	
-    	
-    	
-    	File schemFiles = new File(this.getDataFolder(), "schematics");
-    	if ( schemFiles.exists() && schemFiles.listFiles().length > 0 ) {
-    		for( File f : schemFiles.listFiles() ) {
-    			BuildingEvent.RegisterBuilding(f.getName(), f, new BuildingConstraint());
-    		}
-    	} else {
-    		
-    		schemFiles.mkdir();
-			this.saveResource("corporate_building.schem", false);
-			
-			for( File f : schemFiles.listFiles() ) {
-				BuildingEvent.RegisterBuilding(f.getName(), f, new BuildingConstraint());
+		AddonConfig cfg = this.getConfig();
+		cfg.addDefault("naniteSynthesizer.constraintX", 5000);
+		cfg.addDefault("naniteSynthesizer.constraintZ", 5000);
+
+		if (Bukkit.getPluginManager().getPlugin("WorldEdit") != null || Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit") != null) {
+			CorporateDimensionBuildings BuildingEvent = new CorporateDimensionBuildings();
+
+			File schemFiles = new File(this.getDataFolder(), "schematics");
+			if (schemFiles.exists() && schemFiles.listFiles().length > 0) {
+				for (File f : schemFiles.listFiles()) {
+					BuildingEvent.RegisterBuilding(f.getName(), f, new BuildingConstraint());
+				}
+			} else {
+
+				schemFiles.mkdir();
+				this.saveResource("corporate_building.schem", false);
+
+				for (File f : schemFiles.listFiles()) {
+					BuildingEvent.RegisterBuilding(f.getName(), f, new BuildingConstraint());
+				}
+
 			}
-    		
-    	}
+		}
     	new CorporateDimension(this);
     	Items ItemRegistry = new Items(this);
 		getServer().getPluginManager().registerEvents(new ArmorListener(new ArrayList<String>()), this);

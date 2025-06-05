@@ -36,6 +36,6 @@ public class Centrifuge extends AContainer implements NotHopperable,RecipeDispla
 
     @Override
     public ItemStack getProgressBar() {
-        return new ItemStack(Material.FIRE);
+        return new ItemStack(Material.NETHER_WART_BLOCK);
     }
 }

@@ -25,6 +25,8 @@ depend:
 - Slimefun
 softdepend:
   - InfinityExpansion
+  - WorldEdit
+  - FastAsyncWorldEdit
 
 commands:
    test:
