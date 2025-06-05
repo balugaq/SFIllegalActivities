@@ -15,7 +15,15 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import net.md_5.bungee.api.ChatColor;
 
-public class CircuitFabricator extends AContainer implements NotHopperable,RecipeDisplayItem,Radioactive {
+import javax.annotation.Nonnull;
+import java.util.List;
+
+public class CircuitFabricator extends AContainer implements RecipeDisplayItem, NotHopperable,Radioactive {
+	@Override
+	@Nonnull
+	public List<ItemStack> getDisplayRecipes() {
+		return super.getDisplayRecipes();
+	}
 
 	public CircuitFabricator(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
 			ItemStack[] recipe) {
@@ -23,6 +31,7 @@ public class CircuitFabricator extends AContainer implements NotHopperable,Recip
 		this.setCapacity(480);
 		this.setEnergyConsumption(120);
 		this.setProcessingSpeed(20);
+		registerDefaultRecipes();
 		// TODO Auto-generated constructor stub
 	}
     @Override

@@ -47,7 +47,7 @@ public class PowerArmorListener implements Listener {
 			if(SlimefunItem.getByItem(e.getPlayer().getInventory().getItemInMainHand()) instanceof PowerArmor) {
 				e.setCancelled(true);
 				//TODO: power armor core UI
-				ATradingInterface TestInterface = new ATradingInterface(InventorySize.LARGE, (ItemStack) Items.MYTHICAL_CHEST, ATrader.TraderFromString("hooker_zombie"));
+				ATradingInterface TestInterface = new ATradingInterface(InventorySize.LARGE, (ItemStack) Items.LEGENDARY_CHEST, ATrader.TraderFromString("hooker_zombie"));
 				TestInterface.Display(e.getPlayer());
 				
 			}

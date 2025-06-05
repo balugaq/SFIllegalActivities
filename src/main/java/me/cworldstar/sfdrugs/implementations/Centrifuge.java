@@ -12,7 +12,16 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.cworldstar.sfdrugs.utils.Items;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 
-public class Centrifuge extends AContainer implements NotHopperable,RecipeDisplayItem  {
+import javax.annotation.Nonnull;
+import java.util.List;
+
+public class Centrifuge extends AContainer implements RecipeDisplayItem, NotHopperable  {
+    @Override
+    @Nonnull
+    public List<ItemStack> getDisplayRecipes() {
+        return super.getDisplayRecipes();
+    }
+
 	public Centrifuge(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
 		super(itemGroup, item, recipeType, recipe);
 		// TODO Auto-generated constructor stub

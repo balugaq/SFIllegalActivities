@@ -14,13 +14,23 @@ import me.cworldstar.sfdrugs.utils.Items;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import net.md_5.bungee.api.ChatColor;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+
 public class MoneyPrinter extends AContainer implements RecipeDisplayItem  {
+    @Override
+    @Nonnull
+    public List<ItemStack> getDisplayRecipes() {
+        return super.getDisplayRecipes();
+    }
+
 	public MoneyPrinter(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
 		super(itemGroup, item, recipeType, recipe);
 		// TODO Auto-generated constructor stub
 		this.setCapacity(12800);
 		this.setEnergyConsumption(1280);
 		this.setProcessingSpeed(20);
+        registerDefaultRecipes();
 	}
     @Override
     public void registerDefaultRecipes() {

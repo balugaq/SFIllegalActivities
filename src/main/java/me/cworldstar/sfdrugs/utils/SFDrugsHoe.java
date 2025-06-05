@@ -31,7 +31,7 @@ public class SFDrugsHoe extends SlimefunItem {
     	HoeZombie.setAI(false);
     	HoeZombie.setSilent(true);
     	HoeZombie.setCustomName(ChatColor.translateAlternateColorCodes('&', "&d&lHooker Zombie"));
-    	HoeZombie.setMetadata("SFDRUGS_IS_HOOKER", new FixedMetadataValue(this.plugin,true));
+    	HoeZombie.setMetadata("SFDRUGS_IS_CORPORATION_TRADER", new FixedMetadataValue(this.plugin,true));
     	HoeZombie.setLootTable(null);
     	event.getItem().setAmount(0);
     }

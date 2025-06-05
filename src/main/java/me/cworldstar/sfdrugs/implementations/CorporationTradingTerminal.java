@@ -22,6 +22,7 @@ import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.cworldstar.sfdrugs.utils.Items;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import org.jetbrains.annotations.NotNull;
 
 public class CorporationTradingTerminal extends CraftingBlock implements Radioactive,EnergyNetComponent {
 	public CorporationTradingTerminal(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
@@ -52,13 +53,8 @@ public class CorporationTradingTerminal extends CraftingBlock implements Radioac
 		// TODO Auto-generated constructor stub
 	}
 	@Override 
-	public void setup(BlockMenuPreset preset) {
-        preset.drawBackground(OUTPUT_BORDER, layout.outputBorder());
-        preset.drawBackground(INPUT_BORDER, layout.inputBorder());
-        preset.drawBackground(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE,""),new int[] {
-        		0,7,8,9,10,16,17,18,19,25,26,27,28,34,35,36,37,43,44,45,46,48,49,50,52,53
-        });
-        preset.addMenuClickHandler(40,ChestMenuUtils.getEmptyClickHandler());
+	public void setup(@NotNull BlockMenuPreset preset) {
+		super.setup(preset);
 	}
     @Override
     public void craft(Block b, BlockMenu menu, Player p) {

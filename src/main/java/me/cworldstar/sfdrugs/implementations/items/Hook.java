@@ -32,7 +32,7 @@ public class Hook extends SimpleSlimefunItem<ItemUseHandler> {
 			if(e.getItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(this.plugin,"Cooldown"),PersistentDataType.INTEGER) == null) {
 				e.getItem().getItemMeta().getPersistentDataContainer().set(new NamespacedKey(this.plugin,"Cooldown"),PersistentDataType.INTEGER, 0);	
 			}
-			if(e.getItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(this.plugin,"Cooldown"),PersistentDataType.INTEGER) == 0) {
+			else if(e.getItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(this.plugin,"Cooldown"),PersistentDataType.INTEGER) == 0) {
 				e.getItem().getItemMeta().getPersistentDataContainer().set(new NamespacedKey(this.plugin,"Cooldown"),PersistentDataType.INTEGER, 30);
 				new BukkitRunnable() {
 					@Override
