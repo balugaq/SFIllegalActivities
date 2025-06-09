@@ -1,5 +1,6 @@
 package me.cworldstar.sfdrugs.implementations.bosses.entities;
 
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Skill {
@@ -38,7 +39,7 @@ public class Skill {
                  */
                 //this.Skill.runTaskTimer(SFDrugs.getPlugin(SFDrugs.class), 0, 100L);
             default:
-                throw new Error("invalid skill type");
+                throw new Error(Texts.error_s_1);
         }
     }
 

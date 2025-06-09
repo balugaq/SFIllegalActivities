@@ -3,6 +3,7 @@ package me.cworldstar.sfdrugs.implementations.bosses.entities;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.utils.RandomUtils;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -57,8 +58,8 @@ public class Sundowner extends NormalEntity {
     public List<String> getAttackingDialog(Player e) {
         // TODO Auto-generated method stub
         List<String> AttackingDialog = new ArrayList<>();
-        AttackingDialog.add(Speak.format("&8&l[ &e&lSundowner &8&l ]:&r &cKids are cruel, ".concat(e.getDisplayName()).concat(". And I'm very much in touch with my inner child!")));
-        AttackingDialog.add(Speak.format("&8&l[ &e&lSundowner &8&l ]:&r &cI'm fucking invincible!"));
+        AttackingDialog.add(Speak.format(Texts.s_1.concat(e.getDisplayName()).concat(Texts.s_2)));
+        AttackingDialog.add(Speak.format(Texts.s_3));
         return null;
     }
 

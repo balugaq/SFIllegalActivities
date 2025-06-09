@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -17,7 +18,7 @@ public class PowerArmor extends SlimefunItem {
         super(itemGroup, item, id, recipeType, recipe);
 
         this.Armor = item;
-        this.getItem().getItemMeta().getPersistentDataContainer().set(SFDrugs.createKey("power_armor_base"), PersistentDataType.INTEGER, 1);
+        this.getItem().getItemMeta().getPersistentDataContainer().set(SFDrugs.createKey(Constants.power_armor_base), PersistentDataType.INTEGER, 1);
         // TODO Auto-generated constructor stub
     }
 
@@ -29,7 +30,7 @@ public class PowerArmor extends SlimefunItem {
 
     public static PowerArmorCore getCore(PowerArmor armorPiece) {
         // TODO Auto-generated method stub
-        return (PowerArmorCore) SlimefunItem.getById(armorPiece.getItem().getItemMeta().getPersistentDataContainer().get(SFDrugs.createKey("power_armor_core"), PersistentDataType.STRING));
+        return (PowerArmorCore) SlimefunItem.getById(armorPiece.getItem().getItemMeta().getPersistentDataContainer().get(SFDrugs.createKey(Constants.power_armor_core), PersistentDataType.STRING));
     }
 
 }

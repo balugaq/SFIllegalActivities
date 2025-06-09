@@ -7,6 +7,7 @@ import me.cworldstar.sfdrugs.implementations.gui.ATradingInterface;
 import me.cworldstar.sfdrugs.implementations.gui.ATradingInterface.InventorySize;
 import me.cworldstar.sfdrugs.implementations.powerarmor.PowerArmor;
 import me.cworldstar.sfdrugs.implementations.traders.ATrader;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Items;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -44,7 +45,7 @@ public class PowerArmorListener implements Listener {
             if (SlimefunItem.getByItem(e.getPlayer().getInventory().getItemInMainHand()) instanceof PowerArmor) {
                 e.setCancelled(true);
                 //TODO: power armor core UI
-                ATradingInterface TestInterface = new ATradingInterface(InventorySize.LARGE, Items.LEGENDARY_CHEST, ATrader.TraderFromString("hooker_zombie"));
+                ATradingInterface TestInterface = new ATradingInterface(InventorySize.LARGE, Items.LEGENDARY_CHEST, ATrader.TraderFromString(Constants.hooker_zombie));
                 TestInterface.Display(e.getPlayer());
 
             }

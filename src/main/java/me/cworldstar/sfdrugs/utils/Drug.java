@@ -70,27 +70,27 @@ public class Drug extends SlimefunItem implements Listener {
 
     private void onItemUseRightClick(PlayerRightClickEvent event) {
 
-        if (event.getPlayer().getPersistentDataContainer().has(SFDrugs.createKey(this.drugId + "_overdosing"), PersistentDataType.INTEGER)) {
+        if (event.getPlayer().getPersistentDataContainer().has(SFDrugs.createKey(this.drugId + Constants._overdosing), PersistentDataType.INTEGER)) {
             event.cancel();
             return;
         }
 
-        if (event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + "_overdose"), PersistentDataType.INTEGER) == null) {
-            event.getPlayer().getPersistentDataContainer().set(SFDrugs.createKey(this.drugId + "_overdose"), PersistentDataType.INTEGER, 1);
+        if (event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + Constants._overdose), PersistentDataType.INTEGER) == null) {
+            event.getPlayer().getPersistentDataContainer().set(SFDrugs.createKey(this.drugId + Constants._overdose), PersistentDataType.INTEGER, 1);
         }
 
-        if (event.getPlayer().hasMetadata("SFDRUGS_PLAYER_IS_RIGHTCLICKING_TRADER")) {
+        if (event.getPlayer().hasMetadata(Constants.SfDrugsPlayerIsRightClickingTrader)) {
             event.cancel();
             return;
         }
         for (PotionEffect effect : this.potionEffects) {
             event.getPlayer().addPotionEffect(effect);
-            int overdosing = event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + "_overdose"), PersistentDataType.INTEGER);
-            if (overdosing >= this.overdoseLimit && event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + "_overdosing"), PersistentDataType.INTEGER) == null) {
-                event.getPlayer().getPersistentDataContainer().set(SFDrugs.createKey(this.drugId + "_overdosing"), PersistentDataType.INTEGER, 1);
+            int overdosing = event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + Constants._overdose), PersistentDataType.INTEGER);
+            if (overdosing >= this.overdoseLimit && event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + Constants._overdosing), PersistentDataType.INTEGER) == null) {
+                event.getPlayer().getPersistentDataContainer().set(SFDrugs.createKey(this.drugId + Constants._overdosing), PersistentDataType.INTEGER, 1);
                 this.applyOverdoseEffects(event.getPlayer());
             } else {
-                event.getPlayer().getPersistentDataContainer().set(SFDrugs.createKey(this.drugId + "_overdose"), PersistentDataType.INTEGER, event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + "_overdose"), PersistentDataType.INTEGER) + 1);
+                event.getPlayer().getPersistentDataContainer().set(SFDrugs.createKey(this.drugId + Constants._overdose), PersistentDataType.INTEGER, event.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + Constants._overdose), PersistentDataType.INTEGER) + 1);
             }
         }
         event.getItem().setAmount(event.getItem().getAmount() - 1);
@@ -98,8 +98,8 @@ public class Drug extends SlimefunItem implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     private void onPlayerItemConsumeEvent(PlayerItemConsumeEvent e) {
-        if (e.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + "_overdosing"), PersistentDataType.INTEGER) != null && e.getItem().isSimilar(new ItemStack(Material.MILK_BUCKET))) {
-            new Speak(e.getPlayer(), "&4&lOh god! What was that horrid liquid?!");
+        if (e.getPlayer().getPersistentDataContainer().get(SFDrugs.createKey(this.drugId + Constants._overdosing), PersistentDataType.INTEGER) != null && e.getItem().isSimilar(new ItemStack(Material.MILK_BUCKET))) {
+            new Speak(e.getPlayer(), Texts.drug_1);
             e.setCancelled(true);
         }
     }
@@ -109,9 +109,9 @@ public class Drug extends SlimefunItem implements Listener {
         for (PotionEffect pEffect : this.overdoseEffects) {
             p.addPotionEffect(pEffect);
         }
-        new Speak(p, "&4&lYou feel like you took too much " + this.getItemName() + "&4&l!");
-        new Speak(p, "&4&lYou feel your brain melting out your nose!");
-        new Speak(p, "&7[ " + p.getName() + "]: I feel my brain melting out my nose! ARGH!", 10);
+        new Speak(p, Texts.drug_2 + this.getItemName() + "&4&l!");
+        new Speak(p, Texts.drug_3);
+        new Speak(p, "&7[ " + p.getName() + "]: " + Texts.drug_4, 10);
         int max_ticks = this.overdoseTicks;
         String itemName = this.drugId;
 
@@ -123,12 +123,12 @@ public class Drug extends SlimefunItem implements Listener {
             public void run() {
                 // TODO Auto-generated method stub
                 if (ticks_elapsed >= max_ticks) {
-                    p.getPersistentDataContainer().remove(SFDrugs.createKey(itemName + "_overdosing"));
-                    p.getPersistentDataContainer().set(SFDrugs.createKey(itemName + "_overdose"), PersistentDataType.INTEGER, 1);
+                    p.getPersistentDataContainer().remove(SFDrugs.createKey(itemName + Constants._overdosing));
+                    p.getPersistentDataContainer().set(SFDrugs.createKey(itemName + Constants._overdose), PersistentDataType.INTEGER, 1);
                     for (PotionEffect eff : p.getActivePotionEffects()) {
                         p.removePotionEffect(eff.getType());
                     }
-                    new Speak(p, "&e&lYou feel better now.");
+                    new Speak(p, Texts.drug_5);
                     this.cancel();
                 } else {
                     ticks_elapsed += 2;

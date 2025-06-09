@@ -1,6 +1,7 @@
 package me.cworldstar.sfdrugs.implementations;
 
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
@@ -9,9 +10,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 public enum DamageType {
-    UNSTABLE_OBJECT("&f&l&k|||&r &f&lUnstable Object &k|||&r"),
-    LASER_PROJECTILE("&6&l&k|||&r &e&lLaser Projectile &k|||&r"),
-    ANTIMATTER_DETONATION("&d&l&k|||&r &5&lAntimatter Detonation&r &d&l&k|||&r");
+    UNSTABLE_OBJECT(Texts.dt_1),
+    LASER_PROJECTILE(Texts.dt_2),
+    ANTIMATTER_DETONATION(Texts.dt_3);
 
     private final String DAMAGETYPE_DISPLAY_NAME;
 

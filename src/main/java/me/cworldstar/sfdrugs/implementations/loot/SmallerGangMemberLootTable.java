@@ -2,6 +2,7 @@ package me.cworldstar.sfdrugs.implementations.loot;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Items;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.Inventory;
@@ -25,7 +26,7 @@ public class SmallerGangMemberLootTable implements LootTable {
     @Override
     public NamespacedKey getKey() {
         // TODO Auto-generated method stub
-        return new NamespacedKey(plugin, "SmallerGangMember");
+        return new NamespacedKey(plugin, Constants.sgm);
     }
 
     @Override

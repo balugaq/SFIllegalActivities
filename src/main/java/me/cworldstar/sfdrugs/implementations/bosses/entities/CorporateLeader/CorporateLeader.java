@@ -8,8 +8,10 @@ import me.cworldstar.sfdrugs.implementations.bosses.entities.EntityDialog;
 import me.cworldstar.sfdrugs.implementations.bosses.entities.EntityDialog.Personality;
 import me.cworldstar.sfdrugs.implementations.bosses.entities.Skill;
 import me.cworldstar.sfdrugs.implementations.loot.CorporateLeaderLootTable;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.RandomUtils;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -27,7 +29,7 @@ import java.util.List;
 public class CorporateLeader extends BossEntity {
 
     public CorporateLeader(World world, Location location) {
-        super(EntityType.ZOMBIE, world, location, "corporate_leader");
+        super(EntityType.ZOMBIE, world, location, Constants.corporate_leader);
         SFDrugs plugin = SFDrugs.getPlugin(SFDrugs.class);
         this.addSkillToEntity(this.SummonCorporateWorkers(world));
         this.setArmor(null, null, null, null);
@@ -57,31 +59,31 @@ public class CorporateLeader extends BossEntity {
 
     protected static List<String> getAttackingDialog(Player target) {
         List<String> AttackingDialog = new ArrayList<>();
-        AttackingDialog.add(Speak.format("&8&l[ &e&lSundowner &8&l ]:&r &cI'm fucking invincible!"));
+        AttackingDialog.add(Speak.format(Texts.cl_1));
         return AttackingDialog;
     }
 
     @Override
     public EntityDialog registerDialogs() {
-        EntityDialog DialogManager = new EntityDialog("&7Corporate Leader", Personality.NEUTRAL);
+        EntityDialog DialogManager = new EntityDialog(Texts.cl_2, Personality.NEUTRAL);
         // Neutral personality dialog
         DialogManager.registerAllDialogs(Personality.NEUTRAL, new String[]{
-                "&7These poor fools...",
-                "&7They'll never pay off their debt.",
-                "&7I'll never be satisfied.",
-                "&7Mysterious trader... Who are you really?",
+                Texts.cl_3,
+                Texts.cl_4,
+                Texts.cl_5,
+                Texts.cl_6,
 
         });
         return DialogManager;
     }
 
     public void applyEntityEdits(SFDrugs plugin, Zombie z) {
-        z.setCustomName(ChatColor.translateAlternateColorCodes('&', "&d&lCorporate Executive"));
+        z.setCustomName(ChatColor.translateAlternateColorCodes('&', Texts.cl_7_bbh_1));
         z.setCanPickupItems(false);
         z.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(3000);
         z.setHealth(z.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
         z.setRemoveWhenFarAway(false);
-        z.setMetadata("SFDRUGS_CUSTOM_MOB", new FixedMetadataValue(plugin, "corporate_executive"));
+        z.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(plugin, Constants.corporate_executive));
         z.setAdult();
         z.setCanPickupItems(false);
         z.setLootTable(new CorporateLeaderLootTable(plugin));
@@ -97,7 +99,6 @@ public class CorporateLeader extends BossEntity {
             // TODO Auto-generated method stub
             for (int i = 0; i <= RandomUtils.nextInt(4); i++) {
                 Zombie z = (Zombie) w.spawnEntity(e.getLocation().add(RandomUtils.RandomLocation(w, 5, 0, 5)), EntityType.ZOMBIE);
-                @SuppressWarnings("unused")
                 CorporateWorker Worker = new CorporateWorker(plugin, z);
             }
         });
@@ -108,12 +109,10 @@ public class CorporateLeader extends BossEntity {
         SFDrugs plugin = SFDrugs.getPlugin(SFDrugs.class);
 
         return new Skill(Skill.SkillType.SEQUENCED, new BukkitRunnable() {
-            @SuppressWarnings("unused")
             final
             int times_ran = 0;
-            @SuppressWarnings("unused")
             final
-            Speak speak = new Speak(e, e.getNearbyEntities(20, 20, 20), Speak.format("&d&l[Corporate Executive]:&r &dDamage detected to exterior. Administrating first aid."));
+            Speak speak = new Speak(e, e.getNearbyEntities(20, 20, 20), Speak.format(Texts.cl_8));
 
             @Override
             public void run() {

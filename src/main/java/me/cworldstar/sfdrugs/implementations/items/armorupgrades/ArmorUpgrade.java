@@ -3,6 +3,7 @@ package me.cworldstar.sfdrugs.implementations.items.armorupgrades;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.events.ArmorUpgradeListeners;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -85,7 +86,7 @@ public abstract class ArmorUpgrade {
 
         this.onUpgradeApplied(ArmorPiece, ArmorPiece.getItemMeta().getPersistentDataContainer());
         Player p = (Player) e.getWhoClicked();
-        p.sendTitle(Speak.format("&a&lUpgrade Applied!"), Speak.format("&eCongratulations :)"), 10, 70, 20);
+        p.sendTitle(Speak.format(Texts.au_1), Speak.format(Texts.au_2), 10, 70, 20);
         p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST, 2.0F, 2.0F);
     }
 

@@ -8,9 +8,11 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.generators.DarkMatter;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Items;
 import me.cworldstar.sfdrugs.utils.MiscUtils;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Location;
@@ -31,8 +33,8 @@ public class NaniteSynthesizer extends AbstractMachineBlock implements EnergyNet
     @Override
     public boolean process(Block b, BlockMenu menu) {
         // TODO Auto-generated method stub
-        int maxX = SFDrugs.config().getInt("naniteSynthesizer.maxX");
-        int maxZ = SFDrugs.config().getInt("naniteSynthesizer.maxZ");
+        int maxX = SFDrugs.config().getInt(Constants.naniteSynthesizer_maxX);
+        int maxZ = SFDrugs.config().getInt(Constants.naniteSynthesizer_maxZ);
         if (maxX >= MiscUtils.PositiveInteger(b.getLocation().getBlockX()) && maxZ >= MiscUtils.PositiveInteger(b.getLocation().getBlockZ())) {
             //if ( this.hasDarkMatter(b) && this.getDarkMatter(b) >= NaniteSynthesizer.DarkMatterConsumeRate) {
             this.processedTicks += 10;
@@ -99,8 +101,8 @@ public class NaniteSynthesizer extends AbstractMachineBlock implements EnergyNet
         // TODO Auto-generated method stub
         ArmorStand MessageSender = (ArmorStand) b.getWorld().spawnEntity(b.getLocation(), EntityType.ARMOR_STAND);
         MessageSender.setVisible(false);
-        MessageSender.setCustomName(Speak.format("&6[ Nanite Synthesizer ]"));
-        Speak.AOEMessage(MessageSender, "&6[ Nanite Synthesizer ]: WARNING! MACHINE BREAKING DOWN. Current Integrity: " + integrity + ".", 20);
+        MessageSender.setCustomName(Speak.format(Texts.ns_1));
+        Speak.AOEMessage(MessageSender, Texts.ns_2 + integrity + ".", 20);
         MessageSender.remove();
     }
 

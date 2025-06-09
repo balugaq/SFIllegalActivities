@@ -7,7 +7,9 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -33,7 +35,7 @@ public class Hook extends SimpleSlimefunItem<ItemUseHandler> {
     public @NotNull ItemUseHandler getItemHandler() {
         return (PlayerRightClickEvent e) -> {
             var pdc = e.getItem().getItemMeta().getPersistentDataContainer();
-            var cd = new NamespacedKey(this.plugin, "Cooldown");
+            var cd = new NamespacedKey(this.plugin, Constants.cd);
             var v = pdc.get(cd, PersistentDataType.INTEGER);
             if (v == null) {
                 pdc.set(cd, PersistentDataType.INTEGER, 0);
@@ -49,12 +51,15 @@ public class Hook extends SimpleSlimefunItem<ItemUseHandler> {
                     }
                 }, 0, 20L);
                 Player player = e.getPlayer();
-                new Speak(player, player.getNearbyEntities(15.0, 15.0, 15.0), "&cCome over here!");
-                player.getLastDamageCause().getEntity().teleport(player.getLocation().add(r.nextInt(3), 0, r.nextInt(3)));
-                player.getWorld().playSound(player.getLastDamageCause().getEntity().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.5F, 0.5F);
-                player.setInvulnerable(true);
-                player.getWorld().createExplosion(player.getLastDamageCause().getEntity().getLocation(), 3, true, false);
-                player.setInvulnerable(false);
+                new Speak(player, player.getNearbyEntities(15.0, 15.0, 15.0), Texts.h_1);
+                var c = player.getLastDamageCause();
+                if (c != null) {
+                    c.getEntity().teleport(player.getLocation().add(r.nextInt(3), 0, r.nextInt(3)));
+                    player.getWorld().playSound(c.getEntity().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.5F, 0.5F);
+                    player.setInvulnerable(true);
+                    player.getWorld().createExplosion(c.getEntity().getLocation(), 3, true, false);
+                    player.setInvulnerable(false);
+                }
             }
         };
     }

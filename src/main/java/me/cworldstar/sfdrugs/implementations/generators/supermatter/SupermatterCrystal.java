@@ -1,6 +1,7 @@
 package me.cworldstar.sfdrugs.implementations.generators.supermatter;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import org.bukkit.Location;
 
@@ -21,8 +22,8 @@ public class SupermatterCrystal implements EnergyNetProvider {
     @Override
     public int getGeneratedOutput(Location l, Config data) {
         // TODO Auto-generated method stub
-        if (data.getValue("sm output") != null) {
-            return (int) data.getValue("sm output");
+        if (data.getValue(Constants.sm_output) != null) {
+            return (int) data.getValue(Constants.sm_output);
         }
 
         return 1000;

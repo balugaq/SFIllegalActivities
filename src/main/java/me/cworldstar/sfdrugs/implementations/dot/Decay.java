@@ -2,6 +2,7 @@ package me.cworldstar.sfdrugs.implementations.dot;
 
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
@@ -38,7 +39,7 @@ public class Decay {
         for (PotionEffect potion : Decay.DecayPotionEffects) {
             p.addPotionEffect(potion);
         }
-        new Speak(p, "&7&lYou are decaying. Consider running away.");
+        new Speak(p, Texts.d_1);
         new BukkitRunnable() {
             @Override
             public void run() {

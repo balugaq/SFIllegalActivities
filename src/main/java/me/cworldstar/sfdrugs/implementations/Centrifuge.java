@@ -38,7 +38,7 @@ public class Centrifuge extends AContainer implements RecipeDisplayItem, NotHopp
 
     @Override
     public String getMachineIdentifier() {
-        return "SFDRUGS_CENTRIFUGE";
+        return getId();
     }
 
     private void addRecipe(int seconds, ItemStack[] input, ItemStack[] output) {

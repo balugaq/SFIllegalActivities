@@ -3,6 +3,7 @@ package me.cworldstar.sfdrugs.events;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.items.DrugSuit;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Effect;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -25,7 +26,7 @@ public class DrugSuitWearerDamaged implements Listener {
         if (e.getEntity() instanceof Player p) {
             ItemStack item = p.getInventory().getChestplate();
             if (SlimefunItem.getByItem(item) != null) {
-                if (item.getItemMeta().getDisplayName().contains("Corporate Hazmat")) {
+                if (item.getItemMeta().getDisplayName().contains(Texts.CorporateHazmat)) {
                     DrugSuit T = (DrugSuit) SlimefunItem.getByItem(item);
                     T.PlayerDamaged(e, p, item, e.getFinalDamage() * 10);
                     for (Entity enemies : p.getNearbyEntities(3.0, 3.0, 3.0)) {

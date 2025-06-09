@@ -10,11 +10,11 @@ public final class LoreHandler {
     }
 
     public static String UnstableObjectCooldownTimer(Unstable unstable) {
-        return Speak.format("&f&lCooldown: ".concat(Double.toString(UnstableObject.getCooldown(unstable))));
+        return Speak.format("&f&l" + Texts.cd + " " + UnstableObject.getCooldown(unstable));
     }
 
     public static String UnstableObjectCooldownTimer(double d) {
-        return Speak.format("&f&lCooldown: ".concat(Double.toString(d)));
+        return Speak.format("&f&l" + Texts.cd + " " + d);
     }
 
     public Speak getFormatter() {

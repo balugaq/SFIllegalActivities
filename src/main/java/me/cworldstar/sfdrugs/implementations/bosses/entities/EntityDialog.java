@@ -12,23 +12,22 @@ public class EntityDialog {
     private final String EntityName;
     private final Personality EntityPersonality;
 
-    @SuppressWarnings("static-access")
     public EntityDialog(String FormattedEntityName, Personality Personality) {
 
-        if (Personality.equals(Personality.RANDOM)) {
+        if (Personality.equals(EntityDialog.Personality.RANDOM)) {
             switch (RandomUtils.nextInt(3)) {
                 case 1:
-                    this.EntityPersonality = Personality.SAD;
+                    this.EntityPersonality = EntityDialog.Personality.SAD;
                     break;
                 case 2:
-                    this.EntityPersonality = Personality.NEUTRAL;
+                    this.EntityPersonality = EntityDialog.Personality.NEUTRAL;
                     break;
                 case 3:
-                    this.EntityPersonality = Personality.HAPPY;
+                    this.EntityPersonality = EntityDialog.Personality.HAPPY;
                     break;
                 case 0:
                 default:
-                    this.EntityPersonality = Personality.AGGRESSIVE;
+                    this.EntityPersonality = EntityDialog.Personality.AGGRESSIVE;
                     break;
 
             }
@@ -36,18 +35,17 @@ public class EntityDialog {
             this.EntityPersonality = Personality;
         }
         this.EntityName = FormattedEntityName;
-        this.Dialog.putIfAbsent(Personality.AGGRESSIVE, new ArrayList<>());
-        this.Dialog.putIfAbsent(Personality.SAD, new ArrayList<>());
-        this.Dialog.putIfAbsent(Personality.NEUTRAL, new ArrayList<>());
-        this.Dialog.putIfAbsent(Personality.HAPPY, new ArrayList<>());
+        this.Dialog.putIfAbsent(EntityDialog.Personality.AGGRESSIVE, new ArrayList<>());
+        this.Dialog.putIfAbsent(EntityDialog.Personality.SAD, new ArrayList<>());
+        this.Dialog.putIfAbsent(EntityDialog.Personality.NEUTRAL, new ArrayList<>());
+        this.Dialog.putIfAbsent(EntityDialog.Personality.HAPPY, new ArrayList<>());
 
 
         //THIS SHOULD NEVER BE ACCESSED! HERE FOR PLAUSIBLE DENIABILITY!
-        this.Dialog.putIfAbsent(Personality.RANDOM, new ArrayList<>());
+        this.Dialog.putIfAbsent(EntityDialog.Personality.RANDOM, new ArrayList<>());
     }
 
     public String randomDialog() {
-        // TODO: Create "Personalities" with different dialog.
         return EntityName.concat(this.Dialog.get(this.EntityPersonality).get(RandomUtils.nextInt(this.Dialog.get(this.EntityPersonality).size())));
     }
 

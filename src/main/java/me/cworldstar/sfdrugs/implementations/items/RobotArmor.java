@@ -10,6 +10,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactive;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.Axis;
 import org.bukkit.Effect;
 import org.bukkit.NamespacedKey;
@@ -35,7 +36,7 @@ public class RobotArmor extends CustomArmorPiece implements ProtectiveArmor, Rad
     }
 
     public static boolean IsNotAffected(LivingEntity Enemy) {
-        return (!Enemy.hasMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR"));
+        return (!Enemy.hasMetadata(Constants.AfflictedBySfDrugsRobotArmor));
     }
 
     @Override
@@ -52,7 +53,7 @@ public class RobotArmor extends CustomArmorPiece implements ProtectiveArmor, Rad
         Inventory I = p.getInventory();
         int Wearing = 0;
         for (int i = 5; i <= 8; i++) {
-            if (I.getItem(i).getItemMeta().getDisplayName().contains("Corporate Security Robot")) {
+            if (I.getItem(i).getItemMeta().getDisplayName().contains(Constants.CorporateSecurityRobot)) {
                 Wearing += 1;
             }
         }
@@ -77,11 +78,11 @@ public class RobotArmor extends CustomArmorPiece implements ProtectiveArmor, Rad
                 p.getWorld().playEffect(p.getLocation(), Effect.ELECTRIC_SPARK, Axis.Y);
                 p.getWorld().playSound(p.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.4F, 0.5F);
                 e.setDamage(dmg / 4);
-                p.setMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR", new FixedMetadataValue(this.plugin, true));
+                p.setMetadata(Constants.AfflictedBySfDrugsRobotArmor, new FixedMetadataValue(this.plugin, true));
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        p.removeMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR", plugin);
+                        p.removeMetadata(Constants.AfflictedBySfDrugsRobotArmor, plugin);
                     }
                 }.runTaskLater(this.plugin, 20L);
             }
@@ -94,11 +95,11 @@ public class RobotArmor extends CustomArmorPiece implements ProtectiveArmor, Rad
                 p.getWorld().playEffect(p.getLocation(), Effect.ELECTRIC_SPARK, Axis.Y);
                 p.getWorld().playSound(p.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.4F, 0.5F);
                 e.setDamage(dmg / 4);
-                p.setMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR", new FixedMetadataValue(this.plugin, true));
+                p.setMetadata(Constants.AfflictedBySfDrugsRobotArmor, new FixedMetadataValue(this.plugin, true));
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        p.removeMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR", plugin);
+                        p.removeMetadata(Constants.AfflictedBySfDrugsRobotArmor, plugin);
                     }
                 }.runTaskLater(this.plugin, 20L);
 

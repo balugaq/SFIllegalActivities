@@ -3,8 +3,10 @@ package me.cworldstar.sfdrugs.implementations.bosses.entities;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.loot.SmallerGangMemberLootTable;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.RandomUtils;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Zombie;
@@ -21,7 +23,7 @@ import java.util.List;
 
 public class CorporateWorker {
     public CorporateWorker(SFDrugs plugin, Zombie z) {
-        z.setCustomName(ChatColor.translateAlternateColorCodes('&', "&7Corporate Worker"));
+        z.setCustomName(ChatColor.translateAlternateColorCodes('&', Texts.cw_1));
         z.setMaxHealth(75.0);
         z.setHealth(75.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999, 0));
@@ -38,9 +40,9 @@ public class CorporateWorker {
                 }
             }
         }.runTaskTimer(plugin, 0, 200L);
-        z.setMetadata("SFDRUGS_CUSTOM_MOB", new FixedMetadataValue(plugin, "corporate_worker"));
+        z.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(plugin, Constants.corporate_worker));
         z.setLootTable(new SmallerGangMemberLootTable(plugin));
-        ItemStack ZombieHead = SlimefunUtils.getCustomHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjgxOWM5OTY2ZmQ4OWI0YjM4MTJlMmRmMTdkODk4NzliZTVmMjNmZGU5ZmQ3MTQ2NWQzZjAwMjM2ZGJkMjZmOCJ9fX0=");
+        ItemStack ZombieHead = SlimefunUtils.getCustomHead(Constants.cw_head_1);
         ItemStack Boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         ItemMeta BootsMeta = Boots.getItemMeta();
         BootsMeta.setUnbreakable(true);
@@ -62,18 +64,16 @@ public class CorporateWorker {
     }
 
     private static String randomDialog() {
-        // TODO: Create "Personalities" with different dialog.
-
         String[] list = new String[]{
-                "&7Work all day, die at night.",
-                "&7I'll pay my soul off eventually.",
-                "&7There's no hope.",
-                "&7I can't remember the last time I had a break..."
+                Texts.cw_2,
+                Texts.cw_3,
+                Texts.cw_4,
+                Texts.cw_5
         };
         List<String> dialogs = new ArrayList<>(Arrays.asList(list));
         if (dialogs.get(RandomUtils.nextInt(dialogs.size() - 1)) != null) {
-            return "&7[ Corporate Worker ]:&r ".concat(dialogs.get(RandomUtils.nextInt(dialogs.size() - 1)));
+            return Texts.cw_6.concat(dialogs.get(RandomUtils.nextInt(dialogs.size() - 1)));
         }
-        return "&cSomething went wrong. If you see this, please report it.";
+        return Texts.error_cw_1;
     }
 }

@@ -2,6 +2,7 @@ package me.cworldstar.sfdrugs.implementations.dot;
 
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
@@ -35,7 +36,7 @@ public class Burning {
             p.addPotionEffect(potion);
         }
         p.setFireTicks(60);
-        new Speak(p, "&e&lYou are disintegrating. Consider running away.");
+        new Speak(p, Texts.b_1);
         new BukkitRunnable() {
             int ticks = 0;
 

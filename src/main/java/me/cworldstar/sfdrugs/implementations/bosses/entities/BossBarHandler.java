@@ -1,6 +1,7 @@
 package me.cworldstar.sfdrugs.implementations.bosses.entities;
 
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Texts;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
@@ -20,7 +21,7 @@ import java.util.List;
 public class BossBarHandler {
     public BossBarHandler(Zombie z) {
         SFDrugs plugin = SFDrugs.getPlugin(SFDrugs.class);
-        BossBar EnemyBossBar = Bukkit.getServer().createBossBar(ChatColor.translateAlternateColorCodes('&', "&d&lCorporate Executive"), BarColor.WHITE, BarStyle.SEGMENTED_12, BarFlag.PLAY_BOSS_MUSIC);
+        BossBar EnemyBossBar = Bukkit.getServer().createBossBar(ChatColor.translateAlternateColorCodes('&', Texts.cl_7_bbh_1), BarColor.WHITE, BarStyle.SEGMENTED_12, BarFlag.PLAY_BOSS_MUSIC);
         EnemyBossBar.setVisible(true);
         EnemyBossBar.setProgress(1.0);
         List<Player> Players = new ArrayList<>();

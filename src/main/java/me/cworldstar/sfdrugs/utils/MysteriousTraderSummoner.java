@@ -42,8 +42,8 @@ public class MysteriousTraderSummoner extends SlimefunItem {
 
         });
 
-        HoeZombie.setCustomName(ChatColor.translateAlternateColorCodes('&', "&c&lMysterious Trader"));
-        HoeZombie.setMetadata("SFDRUGS_IS_MYSTERIOUS_TRADER", new FixedMetadataValue(this.plugin, true));
+        HoeZombie.setCustomName(ChatColor.translateAlternateColorCodes('&', Texts.mts_1));
+        HoeZombie.setMetadata(Constants.SfDrugsIsMysteriousTrader, new FixedMetadataValue(this.plugin, true));
         event.getItem().setAmount(0);
     }
 

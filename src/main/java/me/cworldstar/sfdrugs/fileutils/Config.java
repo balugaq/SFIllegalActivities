@@ -1,6 +1,7 @@
 package me.cworldstar.sfdrugs.fileutils;
 
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 
 import java.io.File;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class Config {
 
         } else {
             for (final File f : cfig.listFiles()) {
-                if (f.getName().split("/[,.]/")[1].equals("schem")) {
+                if (f.getName().split("/[,.]/")[1].equals(Constants.schem)) {
                     this.register(f.getName().split("/[,.]/")[0], f);
                 }
             }

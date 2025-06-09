@@ -5,6 +5,7 @@ import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.loot.CorporationEnemyLootTable;
 import me.cworldstar.sfdrugs.implementations.loot.EscapedTestSubjectLootTable;
 import me.cworldstar.sfdrugs.implementations.loot.SmallerGangMemberLootTable;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Items;
 import me.cworldstar.sfdrugs.utils.RandomUtils;
 import org.bukkit.entity.LivingEntity;
@@ -24,26 +25,26 @@ public class CustomMobDeathEvent implements Listener {
     @EventHandler
     public void onMobDeath(EntityDeathEvent e) {
         LivingEntity killedMob = e.getEntity();
-        if (killedMob.hasMetadata("SFDRUGS_CUSTOM_MOB")) {
-            String Identifier = killedMob.getMetadata("SFDRUGS_CUSTOM_MOB").get(0).asString();
+        if (killedMob.hasMetadata(Constants.SfDrugsCustomMob)) {
+            String Identifier = killedMob.getMetadata(Constants.SfDrugsCustomMob).get(0).asString();
             e.getDrops().clear();
             switch (Identifier) {
-                case "red_wolves_trainee":
+                case Constants.red_wolves_trainee:
                     e.getDrops().add(new CustomItemStack(Items.UNCOMMON_CHEST, 1));
                     e.getDrops().addAll(new SmallerGangMemberLootTable(this.plugin).populateLoot(RandomUtils.getRandom(), new LootContext.Builder(killedMob.getLocation()).build()));
                     break;
-                case "corporate_security_robot":
+                case Constants.corporate_security_robot:
                     e.getDrops().add(new CustomItemStack(Items.RARE_CHEST, 1));
 
                     e.getDrops().addAll(new CorporationEnemyLootTable(this.plugin).populateLoot(RandomUtils.getRandom(), new LootContext.Builder(killedMob.getLocation()).build()));
                     break;
-                case "escaped_test_subject":
+                case Constants.escaped_test_subject:
                     //TODO: Loot table for this guy.
                     e.setDroppedExp(7640000);
                     e.getDrops().add(new CustomItemStack(Items.RARE_CHEST, 3));
                     e.getDrops().addAll(new EscapedTestSubjectLootTable(this.plugin).populateLoot(RandomUtils.getRandom(), new LootContext.Builder(killedMob.getLocation()).build()));
                     break;
-                case "red_wolves_gangster":
+                case Constants.red_wolves_gangster:
                     e.getDrops().add(new CustomItemStack(Items.UNCOMMON_CHEST, 2));
                     //TODO: Loot table for this guy.
 

@@ -1,6 +1,7 @@
 package me.cworldstar.sfdrugs.implementations.bosses.entities;
 
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -24,13 +25,13 @@ public abstract class BossEntity implements Listener {
         SFDrugs plugin = SFDrugs.getPlugin(SFDrugs.class);
         this.entity = (LivingEntity) world.spawnEntity(location, Entity);
         this.applyEntityEdits(plugin, (Zombie) this.entity);
-        this.entity.setMetadata("SFDRUGS_CUSTOM_MOB", new FixedMetadataValue(plugin, unlocalized_id));
+        this.entity.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(plugin, unlocalized_id));
     }
 
     public BossEntity(Zombie z, String unlocalized_id) {
         this.entity = z;
         this.applyEntityEdits(SFDrugs.getPlugin(SFDrugs.class), z);
-        this.entity.setMetadata("SFDRUGS_CUSTOM_MOB", new FixedMetadataValue(SFDrugs.getPlugin(SFDrugs.class), unlocalized_id));
+        this.entity.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(SFDrugs.getPlugin(SFDrugs.class), unlocalized_id));
     }
 
     public abstract void applyEntityEdits(SFDrugs plugin, Zombie z);

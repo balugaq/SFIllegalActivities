@@ -72,10 +72,10 @@ public class WorldEater extends SlimefunItem implements Radioactive, DamageableI
     public void getRightClickHandler(PlayerRightClickEvent e) {
         if (e.getItem().containsEnchantment(Enchantment.SILK_TOUCH)) {
             e.getItem().removeEnchantment(Enchantment.SILK_TOUCH);
-            new Speak(e.getPlayer(), "&e=> You have disabled silk touch.");
+            new Speak(e.getPlayer(), Texts.we_1);
         } else {
             e.getItem().addEnchantment(Enchantment.SILK_TOUCH, 1);
-            new Speak(e.getPlayer(), "&e=> You have enabled silk touch.");
+            new Speak(e.getPlayer(), Texts.we_2);
         }
     }
 

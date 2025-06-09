@@ -2,6 +2,7 @@ package me.cworldstar.sfdrugs.events;
 
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.traders.ATrader;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Trading;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
@@ -32,17 +33,17 @@ public class SFHookerEvent implements Listener {
         //TODO: Replace this with a ChestInventory.
 
         Player p = event.getPlayer();
-        if (!event.getRightClicked().hasMetadata("SFDRUGS_IS_HOOKER") & !(event.getHand() == EquipmentSlot.HAND)) {
+        if (!event.getRightClicked().hasMetadata(Constants.SfDrugsIsHooker) & !(event.getHand() == EquipmentSlot.HAND)) {
             event.setCancelled(true);
-        } else if (event.getRightClicked().hasMetadata("SFDRUGS_IS_HOOKER")) {
-            p.setMetadata("SFDRUGS_PLAYER_IS_RIGHTCLICKING_TRADER", new FixedMetadataValue(this.plugin, true));
+        } else if (event.getRightClicked().hasMetadata(Constants.SfDrugsIsHooker)) {
+            p.setMetadata(Constants.SfDrugsPlayerIsRightClickingTrader, new FixedMetadataValue(this.plugin, true));
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.removeMetadata("SFDRUGS_PLAYER_IS_RIGHTCLICKING_TRADER", plugin);
+                    p.removeMetadata(Constants.SfDrugsPlayerIsRightClickingTrader, plugin);
                 }
             }.runTaskLater(plugin, 20L);
-            ATrader.Traders.get("hooker_zombie").newTradingInterface().Display(p);
+            ATrader.Traders.get(Constants.hooker_zombie).newTradingInterface().Display(p);
         }
     }
 }

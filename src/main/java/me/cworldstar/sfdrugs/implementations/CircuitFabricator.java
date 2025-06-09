@@ -9,6 +9,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import me.cworldstar.sfdrugs.utils.Texts;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -47,14 +48,14 @@ public class CircuitFabricator extends AContainer implements RecipeDisplayItem, 
     public ItemStack getProgressBar() {
         // TODO Auto-generated method stub
         ItemStack ProgressBar = new ItemStack(Material.ANVIL);
-        ProgressBar.getItemMeta().setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6&lForging..."));
+        ProgressBar.getItemMeta().setDisplayName(ChatColor.translateAlternateColorCodes('&', Texts.cb_1));
         return ProgressBar;
     }
 
     @Override
     public String getMachineIdentifier() {
         // TODO Auto-generated method stub
-        return "SFDRUGS_CIRCUIT_FABRICATOR";
+        return getId();
     }
 
     @Override

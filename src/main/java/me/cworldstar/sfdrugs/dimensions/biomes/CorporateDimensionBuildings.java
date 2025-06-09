@@ -13,6 +13,8 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.World;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -39,7 +41,7 @@ public class CorporateDimensionBuildings implements Listener {
     }
 
     public void RegisterBuilding(String buildingId, File buildingFile, BuildingConstraint constraint) {
-        SFDrugs.log(Level.INFO, "Building registered! ID: " + buildingId);
+        SFDrugs.log(Level.INFO, Texts.info_cdb_1 + buildingId);
         Buildings.put(buildingId, buildingFile);
         BuildingIds.add(buildingId);
         BuildingConstraints.put(buildingId, constraint);
@@ -52,11 +54,11 @@ public class CorporateDimensionBuildings implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onChunkGenerate(ChunkLoadEvent e) throws WorldEditException {
-        if (e.getChunk().getPersistentDataContainer().has(SFDrugs.createKey("spawn_corporate_building"), PersistentDataType.STRING)) {
+        if (e.getChunk().getPersistentDataContainer().has(SFDrugs.createKey(Constants.spawn_corporate_building), PersistentDataType.STRING)) {
 
 
             //TODO: finish building constraints lol
-            String building_id = e.getChunk().getPersistentDataContainer().get(SFDrugs.createKey("spawn_corporate_building"), PersistentDataType.STRING);
+            String building_id = e.getChunk().getPersistentDataContainer().get(SFDrugs.createKey(Constants.spawn_corporate_building), PersistentDataType.STRING);
             //BuildingConstraint Constraint = this.getBuildingConstraint(building_id);
             //if(Constraint.validate(e.getChunk())) {
             ////

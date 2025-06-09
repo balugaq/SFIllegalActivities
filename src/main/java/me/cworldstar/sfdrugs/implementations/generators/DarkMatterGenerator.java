@@ -6,6 +6,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -23,7 +24,7 @@ public class DarkMatterGenerator extends AbstractMachineBlock implements DarkMat
                                ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
         if (item.getItem() instanceof Block) {
-            ((Block) item).setMetadata("dark-matter-generator", new FixedMetadataValue(plugin, true));
+            ((Block) item).setMetadata(Constants.dark_matter_generator, new FixedMetadataValue(plugin, true));
         }
         this.plugin = plugin;
     }

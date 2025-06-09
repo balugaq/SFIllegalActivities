@@ -1,7 +1,9 @@
 package me.cworldstar.sfdrugs.implementations.traders;
 
+import me.cworldstar.sfdrugs.utils.Constants;
+
 public class HookerZombie extends ATrader {
     public HookerZombie() {
-        super("hooker_zombie");
+        super(Constants.hooker_zombie);
     }
 }

@@ -5,6 +5,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
@@ -18,7 +19,7 @@ public class UnstableObject extends SlimefunItem {
         super(itemGroup, item, id, recipeType, recipe);
         this.unstable = unstable;
         UnstableObject.plugin = plugin;
-        item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(UnstableObject.plugin, "Unstable"), PersistentDataType.DOUBLE, UnstableObject.getCooldown(this.unstable));
+        item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(UnstableObject.plugin, Constants.Unstable), PersistentDataType.DOUBLE, UnstableObject.getCooldown(this.unstable));
         // TODO Auto-generated constructor stub
     }
 
@@ -27,7 +28,7 @@ public class UnstableObject extends SlimefunItem {
         super(itemGroup, item, recipeType, recipe);
         this.unstable = unstable;
         UnstableObject.plugin = plugin;
-        item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(UnstableObject.plugin, "Unstable"), PersistentDataType.DOUBLE, UnstableObject.getCooldown(this.unstable));
+        item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(UnstableObject.plugin, Constants.Unstable), PersistentDataType.DOUBLE, UnstableObject.getCooldown(this.unstable));
         // TODO Auto-generated constructor stub
     }
 

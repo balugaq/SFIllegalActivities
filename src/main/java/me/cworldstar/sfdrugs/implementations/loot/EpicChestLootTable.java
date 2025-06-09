@@ -3,6 +3,7 @@ package me.cworldstar.sfdrugs.implementations.loot;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Items;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -27,7 +28,7 @@ public class EpicChestLootTable implements LootTable {
     @Override
     public NamespacedKey getKey() {
         // TODO Auto-generated method stub
-        return new NamespacedKey(plugin, "SFDRUGS_CORPORATIONENEMY");
+        return new NamespacedKey(plugin, Constants.SfDrugsCorporationEnemy);
     }
 
     @Override

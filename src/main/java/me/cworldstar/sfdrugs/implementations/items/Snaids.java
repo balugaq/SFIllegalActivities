@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -30,7 +31,7 @@ public class Snaids extends SimpleSlimefunItem<ItemUseHandler> {
             Player p = e.getPlayer();
             ItemStack item = e.getItem();
             item.setAmount(item.getAmount() - 1);
-            new Speak(p, "&d&lYou have snaids now. You will die in 30 seconds.");
+            new Speak(p, Texts.snaids_1);
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -38,7 +39,7 @@ public class Snaids extends SimpleSlimefunItem<ItemUseHandler> {
                     nEntity.setCustomNameVisible(false);
                     nEntity.setVisible(false);
                     nEntity.setGravity(false);
-                    nEntity.setCustomName(ChatColor.translateAlternateColorCodes('&', "&6Snaids"));
+                    nEntity.setCustomName(ChatColor.translateAlternateColorCodes('&', Texts.snaids_2));
                     p.setHealth(0.0);
                     nEntity.remove();
                 }

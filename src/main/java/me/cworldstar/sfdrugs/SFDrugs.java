@@ -25,6 +25,7 @@ import me.cworldstar.sfdrugs.implementations.commands.RefreshTraders;
 import me.cworldstar.sfdrugs.implementations.commands.TestCorporationEnemy;
 import me.cworldstar.sfdrugs.implementations.events.ArmorListener;
 import me.cworldstar.sfdrugs.implementations.traders.CorporationTrader;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Items;
 import me.cworldstar.sfdrugs.utils.RandomUtils;
 import me.cworldstar.sfdrugs.utils.Trading;
@@ -55,14 +56,14 @@ public class SFDrugs extends AbstractAddon implements SlimefunAddon {
 
         RandomUtils ThisIsSoStupid = new RandomUtils();
         AddonConfig cfg = this.getConfig();
-        cfg.addDefault("naniteSynthesizer.maxX", 5000);
-        cfg.addDefault("naniteSynthesizer.maxZ", 5000);
+        cfg.addDefault(Constants.naniteSynthesizer_maxX, 5000);
+        cfg.addDefault(Constants.naniteSynthesizer_maxZ, 5000);
         cfg.save();
 
-        if (Bukkit.getPluginManager().isPluginEnabled("WorldEdit") || Bukkit.getPluginManager().isPluginEnabled("FastAsyncWorldEdit")) {
+        if (Bukkit.getPluginManager().isPluginEnabled(Constants.WorldEdit) || Bukkit.getPluginManager().isPluginEnabled(Constants.FastAsyncWorldEdit)) {
             CorporateDimensionBuildings BuildingEvent = new CorporateDimensionBuildings();
 
-            File schemFiles = new File(this.getDataFolder(), "schematics");
+            File schemFiles = new File(this.getDataFolder(), Constants.schematics);
             if (schemFiles.exists() && schemFiles.listFiles().length > 0) {
                 for (File f : schemFiles.listFiles()) {
                     BuildingEvent.RegisterBuilding(f.getName(), f, new BuildingConstraint());
@@ -70,7 +71,7 @@ public class SFDrugs extends AbstractAddon implements SlimefunAddon {
             } else {
 
                 schemFiles.mkdir();
-                this.saveResource("corporate_building.schem", false);
+                this.saveResource(Constants.corporate_building_schem, false);
 
                 for (File f : schemFiles.listFiles()) {
                     BuildingEvent.RegisterBuilding(f.getName(), f, new BuildingConstraint());

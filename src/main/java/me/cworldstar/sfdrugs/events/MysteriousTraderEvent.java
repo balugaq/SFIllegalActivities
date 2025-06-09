@@ -15,7 +15,6 @@ public class MysteriousTraderEvent implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    @SuppressWarnings("unused")
     private void Speak(Player p, String text) {
         p.getWorld().playSound(p.getLocation(), Sound.ENTITY_VILLAGER_TRADE, 0.6F, 0.2F);
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', text));

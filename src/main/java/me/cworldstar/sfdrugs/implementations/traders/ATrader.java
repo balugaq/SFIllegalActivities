@@ -6,6 +6,8 @@ import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.TradingRecipe;
 import me.cworldstar.sfdrugs.implementations.gui.ATradingInterface;
 import me.cworldstar.sfdrugs.implementations.gui.ATradingInterface.InventorySize;
+import me.cworldstar.sfdrugs.utils.Constants;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -19,7 +21,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,10 +51,10 @@ public class ATrader implements Listener {
         ATrader.Traders.put(TraderId, this);
     }
 
-    @Nonnull
+    @Nullable
     public static ATrader TraderFromEntity(Entity rightClicked) {
 
-        String TraderTag = rightClicked.getPersistentDataContainer().get(SFDrugs.createKey("TraderTag"), PersistentDataType.STRING);
+        String TraderTag = rightClicked.getPersistentDataContainer().get(SFDrugs.createKey(Constants.TraderTag), PersistentDataType.STRING);
         if (TraderTag != null) {
             return ATrader.Traders.get(TraderTag);
         }
@@ -107,18 +109,19 @@ public class ATrader implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Player p = event.getPlayer();
-        if (!event.getRightClicked().hasMetadata("SFDRUGS_IS" + this.TraderId.toUpperCase()) & !(event.getHand() == EquipmentSlot.HAND)) {
+        // ? SFDRUGS_IS_
+        if (!event.getRightClicked().hasMetadata("SFDRUGS_IS_" + this.TraderId.toUpperCase()) & !(event.getHand() == EquipmentSlot.HAND)) {
             event.setCancelled(true);
-        } else if (event.getRightClicked().hasMetadata("SFDRUGS_IS" + this.TraderId.toUpperCase()) & event.getHand() == EquipmentSlot.HAND) {
+        } else if (event.getRightClicked().hasMetadata("SFDRUGS_IS_" + this.TraderId.toUpperCase()) & event.getHand() == EquipmentSlot.HAND) {
             // stole this
             float yaw = (float) Math.toDegrees(Math.atan2(
                     p.getLocation().getZ() - event.getRightClicked().getLocation().getZ(), p.getLocation().getX() - event.getRightClicked().getLocation().getX())) - 90;
             event.getRightClicked().setRotation(yaw, event.getRightClicked().getLocation().getPitch());
-            p.setMetadata("SFDRUGS_PLAYER_IS_RIGHTCLICKING_TRADER", new FixedMetadataValue(SFDrugs.getPlugin(SFDrugs.class), true));
+            p.setMetadata(Constants.SfDrugsPlayerIsRightClickingTrader, new FixedMetadataValue(SFDrugs.getPlugin(SFDrugs.class), true));
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.removeMetadata("SFDRUGS_PLAYER_IS_RIGHTCLICKING_TRADER", SFDrugs.getPlugin(SFDrugs.class));
+                    p.removeMetadata(Constants.SfDrugsPlayerIsRightClickingTrader, SFDrugs.getPlugin(SFDrugs.class));
                 }
             }.runTaskLater(SFDrugs.getPlugin(SFDrugs.class), 20L);
             ATrader.Traders.get(this.TraderId).getTradingInterface().Display(p);
@@ -130,7 +133,7 @@ public class ATrader implements Listener {
         // TODO Auto-generated method stub
         ArrayList<TradingRecipe> recipes = new ArrayList<>();
         for (ItemStack item : itemsInHaveSlot) {
-            if (item.getItemMeta().getPersistentDataContainer().has(SFDrugs.createKey("tti_input"), PersistentDataType.INTEGER)) {
+            if (item.getItemMeta().getPersistentDataContainer().has(SFDrugs.createKey(Constants.tti_input), PersistentDataType.INTEGER)) {
                 CustomItemStack ComparableItem;
                 if (SlimefunItem.getByItem(item) != null) {
                     ComparableItem = new CustomItemStack(SlimefunItem.getByItem(item).getItem(), item.getAmount());
@@ -144,8 +147,8 @@ public class ATrader implements Listener {
                     Logger.getGlobal().log(Level.WARNING, Integer.toString(r.getHave().getAmount()));
 
                     if (ComparableItem.isSimilar(r.getHave()) && r.getHave().getAmount() <= ComparableItem.getAmount()) {
-                        Logger.getGlobal().log(Level.WARNING, "matches!");
-                        item.getItemMeta().getPersistentDataContainer().set(SFDrugs.createKey("tti_input"), PersistentDataType.INTEGER, 1);
+                        Logger.getGlobal().log(Level.WARNING, Texts.warn_at_1);
+                        item.getItemMeta().getPersistentDataContainer().set(SFDrugs.createKey(Constants.tti_input), PersistentDataType.INTEGER, 1);
                         recipes.add(r);
                     }
                 }

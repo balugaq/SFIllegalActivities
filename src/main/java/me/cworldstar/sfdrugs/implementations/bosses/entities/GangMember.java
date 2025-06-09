@@ -3,9 +3,11 @@ package me.cworldstar.sfdrugs.implementations.bosses.entities;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.loot.CorporationEnemyLootTable;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.ParticleUtils;
 import me.cworldstar.sfdrugs.utils.RandomUtils;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -34,17 +36,16 @@ import java.util.List;
 import java.util.Random;
 
 public class GangMember {
-    @SuppressWarnings("deprecation")
     public GangMember(SFDrugs plugin, Zombie z) {
-        z.setCustomName(ChatColor.translateAlternateColorCodes('&', "&c&l&k|||&r &4&l⚠ Red Wolves Gangster ⚠&r &c&l&k|||&r"));
+        z.setCustomName(ChatColor.translateAlternateColorCodes('&', Texts.gm_1));
         z.setMaxHealth(750.0);
         z.setHealth(750.0);
         z.setRemoveWhenFarAway(false);
         z.setAdult();
-        z.setMetadata("SFDRUGS_CUSTOM_MOB", new FixedMetadataValue(plugin, "red_wolves_gangster"));
+        z.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(plugin, Constants.red_wolves_gangster));
         z.setCanPickupItems(false);
         z.setLootTable(new CorporationEnemyLootTable(plugin));
-        BossBar EnemyBossBar = Bukkit.getServer().createBossBar(ChatColor.translateAlternateColorCodes('&', "&c&l&k|||&r &4&l⚠ Red Wolves Gangster ⚠&r &c&l&k|||&r"), BarColor.RED, BarStyle.SEGMENTED_12);
+        BossBar EnemyBossBar = Bukkit.getServer().createBossBar(ChatColor.translateAlternateColorCodes('&', Texts.gm_1), BarColor.RED, BarStyle.SEGMENTED_12);
         EnemyBossBar.setVisible(true);
         EnemyBossBar.setProgress(1.0);
         List<Player> Players = new ArrayList<>();
@@ -75,11 +76,11 @@ public class GangMember {
         }.runTaskTimer(plugin, 0L, 20L);
 
 
-        ItemStack ZombieHead = SlimefunUtils.getCustomHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjc2MzQzZjU3NzYwMTY3ODNjMDJmZTdiNDU3NjMxYWU2YWJjZWIwMjYzOTQwODBhZmNjMzM1NDIxYjJjYzZiIn19fQ==");
+        ItemStack ZombieHead = SlimefunUtils.getCustomHead(Constants.gm_head_1);
         ItemStack Boots = new ItemStack(Material.LEATHER_BOOTS);
 
         LeatherArmorMeta BootsMeta = (LeatherArmorMeta) Boots.getItemMeta();
-        new Speak(BootsMeta, "&c Red Wolves Vest");
+        new Speak(BootsMeta, Texts.ets_2_gm_2_sgm_4);
         BootsMeta.setColor(Color.RED);
         BootsMeta.setUnbreakable(true);
         Boots.setItemMeta(BootsMeta);
@@ -87,7 +88,7 @@ public class GangMember {
         ItemStack Leggings = new ItemStack(Material.LEATHER_LEGGINGS);
 
         LeatherArmorMeta LeggingsMeta = (LeatherArmorMeta) Leggings.getItemMeta();
-        new Speak(LeggingsMeta, "&c Red Wolves Jeans");
+        new Speak(LeggingsMeta, Texts.ets_3_gm_3_sgm_3);
         LeggingsMeta.setColor(Color.RED);
         LeggingsMeta.setUnbreakable(true);
         Leggings.setItemMeta(LeggingsMeta);
@@ -96,7 +97,7 @@ public class GangMember {
         Chestplate.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 20);
 
         LeatherArmorMeta ChestplateMeta = (LeatherArmorMeta) Chestplate.getItemMeta();
-        new Speak(ChestplateMeta, "&c Red Wolves Vest");
+        new Speak(ChestplateMeta, Texts.ets_2_gm_2_sgm_4);
         ChestplateMeta.setColor(Color.BLACK);
         ChestplateMeta.setUnbreakable(true);
         Chestplate.setItemMeta(ChestplateMeta);
@@ -123,11 +124,11 @@ public class GangMember {
             public void run() {
                 if (z.isDead()) {
                     this.cancel();
-                } else if (z.hasAI() & z.getTarget() != null && z.getTarget() instanceof LivingEntity) {
+                } else if (z.hasAI() & z.getTarget() != null && z.getTarget() != null) {
                     int RandomNumber = new Random().nextInt(3);
                     switch (RandomNumber) {
                         case 1:
-                            new Speak(z, z.getNearbyEntities(15.0, 15.0, 15.0), "&c&l[&k|||&r &4&l⚠ Red Wolves Gangster ⚠&r &c&l&k|||&r&c&l]:&r &cCome over here!");
+                            new Speak(z, z.getNearbyEntities(15.0, 15.0, 15.0), Texts.gm_4);
                             z.getTarget().teleport(z.getLocation().add(new Random().nextInt(3), 0, new Random().nextInt(3)));
                             z.getWorld().playSound(z.getTarget().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.5F, 0.5F);
                             z.setInvulnerable(true);
@@ -141,10 +142,10 @@ public class GangMember {
                                 }
                             }
                         case 2:
-                            new Speak(z, z.getNearbyEntities(15.0, 15.0, 15.0), "&c&l[&k|||&r &4&l⚠ Red Wolves Gangster ⚠&r &c&l&k|||&r&c&l]:&r &cJust die!");
+                            new Speak(z, z.getNearbyEntities(15.0, 15.0, 15.0), Texts.gm_5);
                             for (int i = 0; i <= 3; i++) {
                                 LlamaSpit LaserProjectile = z.launchProjectile(LlamaSpit.class);
-                                LaserProjectile.setMetadata("SFDRUGS_IS_LASER_PROJECTILE", new FixedMetadataValue(plugin, RandomUtils.nextInt(10).floatValue()));
+                                LaserProjectile.setMetadata(Constants.SfDrugsIsLaserProjectile, new FixedMetadataValue(plugin, RandomUtils.nextInt(10).floatValue()));
                                 Vector source = z.getLocation().getDirection().normalize().multiply(50);
                                 Vector v = z.getTarget().getLocation().toVector().subtract(source);
                                 BukkitTask LaserProjectileVelocityTask = new BukkitRunnable() {

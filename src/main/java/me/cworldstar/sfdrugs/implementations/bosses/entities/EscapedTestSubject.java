@@ -3,7 +3,9 @@ package me.cworldstar.sfdrugs.implementations.bosses.entities;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.bosses.deathsequences.EscapedTestSubjectDeathSequence;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -24,14 +26,14 @@ import java.util.List;
 
 public class EscapedTestSubject {
     public EscapedTestSubject(SFDrugs plugin, Zombie z) {
-        z.setCustomName(ChatColor.translateAlternateColorCodes('&', "&a&l&k|||&r &2&l⚠ Escaped Corporate Test Subject ⚠&r &a&l&k|||&r"));
+        z.setCustomName(ChatColor.translateAlternateColorCodes('&', Texts.ets_1));
         z.setMaxHealth(2000.0);
         z.setHealth(2000.0);
         z.setRemoveWhenFarAway(false);
         z.setAdult();
-        z.setMetadata("SFDRUGS_CUSTOM_MOB", new FixedMetadataValue(plugin, "escaped_test_subject"));
+        z.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(plugin, Constants.escaped_test_subject));
         z.setCanPickupItems(false);
-        BossBar EnemyBossBar = Bukkit.getServer().createBossBar(ChatColor.translateAlternateColorCodes('&', "&a&l&k|||&r &2&l⚠ Escaped Corporate Test Subject ⚠&r &a&l&k|||&r"), BarColor.GREEN, BarStyle.SEGMENTED_12);
+        BossBar EnemyBossBar = Bukkit.getServer().createBossBar(ChatColor.translateAlternateColorCodes('&', Texts.ets_1), BarColor.GREEN, BarStyle.SEGMENTED_12);
         EnemyBossBar.setVisible(true);
         EnemyBossBar.setProgress(1.0);
         List<Player> Players = new ArrayList<>();
@@ -51,10 +53,10 @@ public class EscapedTestSubject {
             }
         }.runTaskTimer(plugin, 0, 1L);
 
-        ItemStack ZombieHead = SlimefunUtils.getCustomHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWNjNGI1YjdmNjE2OTQyOGNlZTcyZDFkZTNlYjkzNTc5M2I3ZDZmNGI2YzFhMjNjMzRhMjZkZGE2MDYwMWNjOSJ9fX0=");
+        ItemStack ZombieHead = SlimefunUtils.getCustomHead(Constants.ets_head_1);
         ItemStack Boots = new ItemStack(Material.LEATHER_BOOTS);
         LeatherArmorMeta BootsMeta = (LeatherArmorMeta) Boots.getItemMeta();
-        new Speak(BootsMeta, "&c Red Wolves Vest");
+        new Speak(BootsMeta, Texts.ets_2_gm_2_sgm_4);
         BootsMeta.setColor(Color.LIME);
         BootsMeta.setUnbreakable(true);
         Boots.setItemMeta(BootsMeta);
@@ -65,7 +67,7 @@ public class EscapedTestSubject {
 
         ItemStack Leggings = new ItemStack(Material.LEATHER_LEGGINGS);
         LeatherArmorMeta LeggingsMeta = (LeatherArmorMeta) Leggings.getItemMeta();
-        new Speak(LeggingsMeta, "&c Red Wolves Jeans");
+        new Speak(LeggingsMeta, Texts.ets_3_gm_3_sgm_3);
         LeggingsMeta.setColor(Color.LIME);
         LeggingsMeta.setUnbreakable(true);
         Leggings.setItemMeta(LeggingsMeta);
@@ -73,7 +75,7 @@ public class EscapedTestSubject {
 
         ItemStack Chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         LeatherArmorMeta ChestplateMeta = (LeatherArmorMeta) Chestplate.getItemMeta();
-        new Speak(ChestplateMeta, "&c Red Wolves Vest");
+        new Speak(ChestplateMeta, Texts.ets_2_gm_2_sgm_4);
         ChestplateMeta.setColor(Color.LIME);
         ChestplateMeta.setUnbreakable(true);
         Chestplate.setItemMeta(ChestplateMeta);

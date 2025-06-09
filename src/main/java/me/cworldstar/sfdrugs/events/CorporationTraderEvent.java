@@ -4,6 +4,7 @@ import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.gui.ATradingInterface;
 import me.cworldstar.sfdrugs.implementations.gui.ATradingInterface.InventorySize;
 import me.cworldstar.sfdrugs.implementations.traders.ATrader;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Trading;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -35,20 +36,23 @@ public class CorporationTraderEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Player p = event.getPlayer();
-        if (!event.getRightClicked().hasMetadata("SFDRUGS_IS_CORPORATION_TRADER") & !(event.getHand() == EquipmentSlot.HAND)) {
+        if (!event.getRightClicked().hasMetadata(Constants.SfDrugsIsCorporationTrader) & !(event.getHand() == EquipmentSlot.HAND)) {
             event.setCancelled(true);
-        } else if (event.getRightClicked().hasMetadata("SFDRUGS_IS_CORPORATION_TRADER")) {
-            p.setMetadata("SFDRUGS_PLAYER_IS_RIGHTCLICKING_TRADER", new FixedMetadataValue(this.plugin, true));
+        } else if (event.getRightClicked().hasMetadata(Constants.SfDrugsIsCorporationTrader)) {
+            p.setMetadata(Constants.SfDrugsPlayerIsRightClickingTrader, new FixedMetadataValue(this.plugin, true));
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.removeMetadata("SFDRUGS_PLAYER_IS_RIGHTCLICKING_TRADER", plugin);
+                    p.removeMetadata(Constants.SfDrugsPlayerIsRightClickingTrader, plugin);
                 }
             }.runTaskLater(plugin, 20L);
 
             PlayerInventory I = p.getInventory();
-            ATradingInterface TheTrading = new ATradingInterface(InventorySize.LARGE, new ItemStack(Material.BLACK_STAINED_GLASS_PANE), ATrader.TraderFromEntity(event.getRightClicked()));
-            TheTrading.Display(p);
+            var t = ATrader.TraderFromEntity(event.getRightClicked());
+            if (t != null) {
+                ATradingInterface TheTrading = new ATradingInterface(InventorySize.LARGE, new ItemStack(Material.BLACK_STAINED_GLASS_PANE), t);
+                TheTrading.Display(p);
+            }
         }
 
     }

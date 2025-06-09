@@ -27,7 +27,7 @@ public class Dryer extends AContainer implements NotHopperable, RecipeDisplayIte
 
     @Override
     public String getMachineIdentifier() {
-        return "SFDRUGS_DRYER";
+        return getId();
     }
 
     private void addRecipe(int seconds, ItemStack[] input, ItemStack[] output) {

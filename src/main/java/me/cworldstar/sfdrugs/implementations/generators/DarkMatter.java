@@ -1,6 +1,7 @@
 package me.cworldstar.sfdrugs.implementations.generators;
 
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -17,23 +18,23 @@ public interface DarkMatter {
 
     default long getDarkMatter(Location BlockLocation) {
         Block b = BlockLocation.getBlock();
-        if (b.hasMetadata("dark-matter-machine")) {
-            return b.getMetadata("dark-matter-amount").get(0).asLong();
+        if (b.hasMetadata(Constants.dark_matter_machine)) {
+            return b.getMetadata(Constants.dark_matter_amount).get(0).asLong();
         }
         return 0;
     }
 
     default long getDarkMatter(Block Machine) {
         Block b = Machine;
-        if (b.hasMetadata("dark-matter-machine")) {
-            return b.getMetadata("dark-matter-amount").get(0).asLong();
+        if (b.hasMetadata(Constants.dark_matter_machine)) {
+            return b.getMetadata(Constants.dark_matter_amount).get(0).asLong();
         }
         return 0;
     }
 
 
     default boolean hasDarkMatter(Block b) {
-        if (b.getMetadata("dark-matter-machine") != null) {
+        if (b.getMetadata(Constants.dark_matter_machine) != null) {
             return this.getDarkMatter(b) > 0;
         }
         return false;
@@ -61,27 +62,27 @@ public interface DarkMatter {
 
 
     default boolean isDarkMatterMachine(Block b) {
-        return b.getMetadata("dark-matter-machine") != null;
+        return b.getMetadata(Constants.dark_matter_machine) != null;
     }
 
     default void addDarkMatter(Location BlockLocation, Long DarkMatter) {
         Block b = BlockLocation.getBlock();
-        if (b.hasMetadata("dark-matter-machine")) {
-            b.setMetadata("dark-matter-amount", new FixedMetadataValue(this.getPlugin(), this.getDarkMatter(BlockLocation) + DarkMatter));
+        if (b.hasMetadata(Constants.dark_matter_machine)) {
+            b.setMetadata(Constants.dark_matter_amount, new FixedMetadataValue(this.getPlugin(), this.getDarkMatter(BlockLocation) + DarkMatter));
         }
     }
 
     default void addDarkMatter(Block Machine, Long DarkMatter) {
         Block b = Machine;
-        if (b.hasMetadata("dark-matter-machine")) {
-            b.setMetadata("dark-matter-amount", new FixedMetadataValue(this.getPlugin(), this.getDarkMatter(Machine) + DarkMatter));
+        if (b.hasMetadata(Constants.dark_matter_machine)) {
+            b.setMetadata(Constants.dark_matter_amount, new FixedMetadataValue(this.getPlugin(), this.getDarkMatter(Machine) + DarkMatter));
         }
     }
 
     default void removeDarkMatter(Block Machine, Long DarkMatter) {
         Block b = Machine;
-        if (b.hasMetadata("dark-matter-machine")) {
-            b.setMetadata("dark-matter-amount", new FixedMetadataValue(this.getPlugin(), this.getDarkMatter(Machine) - DarkMatter));
+        if (b.hasMetadata(Constants.dark_matter_machine)) {
+            b.setMetadata(Constants.dark_matter_amount, new FixedMetadataValue(this.getPlugin(), this.getDarkMatter(Machine) - DarkMatter));
         }
     }
 

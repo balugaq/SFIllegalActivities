@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.cworldstar.sfdrugs.utils.Items;
+import me.cworldstar.sfdrugs.utils.Texts;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -38,7 +39,7 @@ public class MoneyPrinter extends AContainer implements RecipeDisplayItem {
 
     @Override
     public String getMachineIdentifier() {
-        return "SFDRUGS_MONEYPRINTER";
+        return getId();
     }
 
     private void addRecipe(int seconds, ItemStack[] input, ItemStack[] output) {
@@ -48,7 +49,7 @@ public class MoneyPrinter extends AContainer implements RecipeDisplayItem {
     @Override
     public ItemStack getProgressBar() {
         ItemStack ProgressBar = new ItemStack(Material.ANVIL);
-        ProgressBar.getItemMeta().setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lPrinting..."));
+        ProgressBar.getItemMeta().setDisplayName(ChatColor.translateAlternateColorCodes('&', Texts.mp_1));
         return ProgressBar;
     }
 }

@@ -4,7 +4,9 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.bosses.entities.EntityDialog.Personality;
 import me.cworldstar.sfdrugs.implementations.loot.SmallerGangMemberLootTable;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,7 +28,7 @@ public class CorporateScout extends BossEntity {
 
     public CorporateScout(SFDrugs plugin, World w, Location l) {
 
-        super(EntityType.ZOMBIE, w, l, "corporate_scout");
+        super(EntityType.ZOMBIE, w, l, Constants.corporate_scout);
         EntityDialog DialogManager = this.registerDialogs();
 
 
@@ -61,7 +63,7 @@ public class CorporateScout extends BossEntity {
      */
     public CorporateScout(SFDrugs plugin, Zombie entity) {
 
-        super(entity, "corporate_scout");
+        super(entity, Constants.corporate_scout);
         EntityDialog DialogManager = this.registerDialogs();
         CorporateScout scout = this;
 
@@ -85,30 +87,30 @@ public class CorporateScout extends BossEntity {
 
     @Override
     public EntityDialog registerDialogs() {
-        EntityDialog DialogManager = new EntityDialog("&7Corporate Scout", Personality.RANDOM);
+        EntityDialog DialogManager = new EntityDialog(Texts.cs_1, Personality.RANDOM);
         // Neutral personality dialog
         DialogManager.registerAllDialogs(Personality.NEUTRAL, new String[]{
-                "&7This is really boring.",
-                "&7I can't see anything.",
-                "&7I haven't found anything yet."
+                Texts.cs_2,
+                Texts.cs_3,
+                Texts.cs_4
         });
         // Aggressive personality dialog
         DialogManager.registerAllDialogs(Personality.AGGRESSIVE, new String[]{
-                "&7Where is everything???",
-                "&7ARGH! This is so frustrating! I could be at home right now!",
-                "&7SOMEONE, COME OUT!"
+                Texts.cs_5,
+                Texts.cs_6,
+                Texts.cs_7
         });
         // Sad personality dialog
         DialogManager.registerAllDialogs(Personality.SAD, new String[]{
-                "&7Does anything even exist...",
-                "&7*sighs*",
-                "&7And I get stuck with the boring job..."
+                Texts.cs_8,
+                Texts.cs_9,
+                Texts.cs_10
         });
         // Happy personality dialog
         DialogManager.registerAllDialogs(Personality.HAPPY, new String[]{
-                "&7The sights are so nice out here!",
-                "&7I hope I find something!",
-                "&7I can't wait to get promoted once I find something!"
+                Texts.cs_11,
+                Texts.cs_12,
+                Texts.cs_13
         });
         return DialogManager;
     }
@@ -116,16 +118,16 @@ public class CorporateScout extends BossEntity {
     @Override
     public void applyEntityEdits(SFDrugs plugin, Zombie z) {
         // TODO Auto-generated method stub
-        z.setCustomName(ChatColor.translateAlternateColorCodes('&', "&7Corporate Scout"));
+        z.setCustomName(ChatColor.translateAlternateColorCodes('&', Texts.cs_1));
         z.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(75);
         z.setHealth(75.0);
         z.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999, 0));
         z.setAbsorptionAmount(100);
         z.setAdult();
         z.setCanPickupItems(false);
-        z.setMetadata("SFDRUGS_CUSTOM_MOB", new FixedMetadataValue(plugin, "corporate_scout"));
+        z.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(plugin, Constants.corporate_scout));
         z.setLootTable(new SmallerGangMemberLootTable(plugin));
-        ItemStack ZombieHead = SlimefunUtils.getCustomHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjgxOWM5OTY2ZmQ4OWI0YjM4MTJlMmRmMTdkODk4NzliZTVmMjNmZGU5ZmQ3MTQ2NWQzZjAwMjM2ZGJkMjZmOCJ9fX0=");
+        ItemStack ZombieHead = SlimefunUtils.getCustomHead(Constants.cs_head_1);
         ItemStack Boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         ItemMeta BootsMeta = Boots.getItemMeta();
         BootsMeta.setUnbreakable(true);

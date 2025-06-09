@@ -14,6 +14,7 @@ import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.dot.Burning;
 import me.cworldstar.sfdrugs.implementations.dot.Decay;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -79,7 +80,7 @@ public class LaserSword extends SlimefunItem implements Radioactive, Rechargeabl
                 }
             }
         } else if (this.getItemCharge(i) <= e.getFinalDamage() * 2) {
-            new Speak(p, "&7You attempt to swing with a sheathed hilt. It does not work.");
+            new Speak(p, Texts.ls_1);
             e.setDamage(0);
             e.setCancelled(true);
         }
@@ -93,14 +94,14 @@ public class LaserSword extends SlimefunItem implements Radioactive, Rechargeabl
         switch (Sword.getType()) {
             case STONE_SWORD:
                 Sword.setType(Material.GOLDEN_SWORD);
-                Lore.set(0, Speak.format("&eDisintegrate C"));
+                Lore.set(0, Speak.format(Texts.ls_2));
                 SwordItemMeta.setLore(Lore);
                 Sword.setItemMeta(SwordItemMeta);
                 Sword.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 10);
                 break;
             case GOLDEN_SWORD:
                 Sword.setType(Material.STONE_SWORD);
-                Lore.set(0, Speak.format("&7Decay C"));
+                Lore.set(0, Speak.format(Texts.ls_3));
                 SwordItemMeta.setLore(Lore);
                 Sword.setItemMeta(SwordItemMeta);
                 Sword.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);

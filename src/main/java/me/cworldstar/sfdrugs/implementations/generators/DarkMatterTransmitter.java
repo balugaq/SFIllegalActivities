@@ -6,6 +6,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.block.Block;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -21,7 +22,7 @@ public class DarkMatterTransmitter extends SlimefunItem implements DarkMatter, L
         super(category, item, recipeType, recipe);
         // TODO Auto-generated constructor stub
         if (item.getItem() instanceof Block) {
-            ((Block) item).setMetadata("dark-matter-transmitter", new FixedMetadataValue(plugin, true));
+            ((Block) item).setMetadata(Constants.dark_matter_transmitter, new FixedMetadataValue(plugin, true));
         }
     }
 

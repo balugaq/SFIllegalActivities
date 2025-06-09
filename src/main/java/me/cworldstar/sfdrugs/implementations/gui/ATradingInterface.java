@@ -5,6 +5,8 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.TradingRecipe;
 import me.cworldstar.sfdrugs.implementations.traders.ATrader;
+import me.cworldstar.sfdrugs.utils.Constants;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -55,20 +57,20 @@ public class ATradingInterface implements Listener {
         this.OutputItem = new ItemStack(Material.RED_STAINED_GLASS_PANE);
         ItemMeta meta = this.BorderItem.getItemMeta();
         meta.setDisplayName(" ");
-        meta.getPersistentDataContainer().set(SFDrugs.createKey("tti_border"), PersistentDataType.INTEGER, 1);
+        meta.getPersistentDataContainer().set(SFDrugs.createKey(Constants.tti_border), PersistentDataType.INTEGER, 1);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
         this.BorderItem.setItemMeta(meta);
 
         ItemMeta inputItemMeta = this.InputItem.getItemMeta();
-        inputItemMeta.setDisplayName("Input Item");
-        inputItemMeta.getPersistentDataContainer().set(SFDrugs.createKey("tti_input"), PersistentDataType.INTEGER, 1);
+        inputItemMeta.setDisplayName(Texts.ati_1);
+        inputItemMeta.getPersistentDataContainer().set(SFDrugs.createKey(Constants.tti_input), PersistentDataType.INTEGER, 1);
         inputItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         this.InputItem.setItemMeta(inputItemMeta);
 
         ItemMeta outputItemMeta = this.OutputItem.getItemMeta();
-        outputItemMeta.setDisplayName("Output Item");
-        outputItemMeta.getPersistentDataContainer().set(SFDrugs.createKey("tti_output"), PersistentDataType.INTEGER, 1);
+        outputItemMeta.setDisplayName(Texts.ati_2);
+        outputItemMeta.getPersistentDataContainer().set(SFDrugs.createKey(Constants.tti_output), PersistentDataType.INTEGER, 1);
         outputItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         this.OutputItem.setItemMeta(outputItemMeta);
 
@@ -125,7 +127,7 @@ public class ATradingInterface implements Listener {
             ItemStack shiftClickItem = e.getCurrentItem();
             ItemMeta ItemToPlaceMeta = shiftClickItem.getItemMeta();
             PersistentDataContainer ItemToPlaceDataContainer = ItemToPlaceMeta.getPersistentDataContainer();
-            ItemToPlaceDataContainer.set(SFDrugs.createKey("tti_input"), PersistentDataType.INTEGER, 1);
+            ItemToPlaceDataContainer.set(SFDrugs.createKey(Constants.tti_input), PersistentDataType.INTEGER, 1);
             shiftClickItem.setItemMeta(ItemToPlaceMeta);
             this.TradingTerminalInterface.setItem(this.TradingTerminalInterface.first(this.InputItem), new CustomItemStack(shiftClickItem, shiftClickItem.getAmount()));
             e.getWhoClicked().getInventory().setItem(e.getRawSlot(), null);
@@ -143,13 +145,13 @@ public class ATradingInterface implements Listener {
                 ItemStack For = recipe.getFor();
                 ItemMeta ForMeta = For.getItemMeta();
                 PersistentDataContainer ForItemContainer = ForMeta.getPersistentDataContainer();
-                ForItemContainer.set(SFDrugs.createKey("tti_output"), PersistentDataType.INTEGER, 1);
+                ForItemContainer.set(SFDrugs.createKey(Constants.tti_output), PersistentDataType.INTEGER, 1);
                 For.setItemMeta(ForMeta);
                 int FirstPlaceable = this.TradingTerminalInterface.first(this.OutputItem);
                 if (FirstPlaceable != -1) {
                     this.TradingTerminalInterface.setItem(this.TradingTerminalInterface.first(this.OutputItem), For);
                 } else {
-                    SFDrugs.log(Level.WARNING, "\u001B[31m" + recipe.getFor().getItemMeta().getDisplayName() + " could not be displayed." + "\n" + "This is not an error.");
+                    SFDrugs.log(Level.WARNING, "\u001B[31m" + recipe.getFor().getItemMeta().getDisplayName() + Texts.warn_ati_1);
                 }
             }
         }
@@ -162,9 +164,9 @@ public class ATradingInterface implements Listener {
                 ItemStack ClickedItem = e.getCurrentItem();
                 ItemMeta ClickedItemMeta = ClickedItem.getItemMeta();
                 PersistentDataContainer DataContainer = ClickedItemMeta.getPersistentDataContainer();
-                if (DataContainer.has(SFDrugs.createKey("tti_border"), PersistentDataType.INTEGER)) {
+                if (DataContainer.has(SFDrugs.createKey(Constants.tti_border), PersistentDataType.INTEGER)) {
                     e.setCancelled(true);
-                } else if (DataContainer.has(SFDrugs.createKey("tti_input"), PersistentDataType.INTEGER) && !e.getCursor().isSimilar(new ItemStack(Material.AIR))) {
+                } else if (DataContainer.has(SFDrugs.createKey(Constants.tti_input), PersistentDataType.INTEGER) && !e.getCursor().isSimilar(new ItemStack(Material.AIR))) {
                     ItemStack ItemToPlace = e.getCursor();
 
                     if (ItemToPlace != null) {
@@ -187,7 +189,7 @@ public class ATradingInterface implements Listener {
                                     ItemStack For = recipe.getFor();
                                     ItemMeta ForMeta = For.getItemMeta();
                                     PersistentDataContainer ForItemContainer = ForMeta.getPersistentDataContainer();
-                                    ForItemContainer.set(SFDrugs.createKey("tti_output"), PersistentDataType.INTEGER, 1);
+                                    ForItemContainer.set(SFDrugs.createKey(Constants.tti_output), PersistentDataType.INTEGER, 1);
                                     For.setItemMeta(ForMeta);
                                     int FirstPlaceable = this.TradingTerminalInterface.first(this.OutputItem);
                                     if (FirstPlaceable != -1) {

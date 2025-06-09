@@ -9,6 +9,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.WeaponUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.inventory.ItemStack;
@@ -36,7 +37,7 @@ public class DrugBaton extends SimpleSlimefunItem<WeaponUseHandler> implements R
                 }
             } else if (e.getFinalDamage() > 0) {
                 e.setDamage(e.getFinalDamage() / 4);
-                new Speak(p, "&7Your baton has run out of power.");
+                new Speak(p, Texts.db_1);
             }
 
         };

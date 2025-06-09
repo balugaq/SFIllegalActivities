@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.items.RobotArmor;
 import me.cworldstar.sfdrugs.implementations.items.RobotArmorSet;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.Effect;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -26,21 +27,6 @@ public class RobotArmorDamaged implements Listener {
     }
 
     private void HandleZombie(EntityDamageByEntityEvent e, Mob p) {
-    	/*if(p.getEquipment().getChestplate() != null) {
-			ItemStack item = p.getEquipment().getChestplate();
-			if (SlimefunItem.getByItem(item) != null) {
-				if(item.getItemMeta().getDisplayName().contains("Corporate Security Robot")) {
-					RobotArmor T = (RobotArmor) SlimefunItem.getByItem(item);
-					T.EntityDamaged(e,p,item,new Double(e.getFinalDamage() * 10));
-					 for(Entity enemies : p.getNearbyEntities(3.0, 3.0, 3.0)) {
-						 if(enemies instanceof LivingEntity) {
-							 enemies.getWorld().playEffect(enemies.getLocation(), Effect.BONE_MEAL_USE, 12);
-							 ((LivingEntity) enemies).damage(new Double(e.getDamage() / 2),p);
-						 }
-					 }
-				}
-			}
-    	}  */
         /**
          *
          * New Implementation of RobotArmorSet.
@@ -58,14 +44,14 @@ public class RobotArmorDamaged implements Listener {
                             if (RobotArmor.IsNotAffected((LivingEntity) enemies) && (!enemies.equals(p))) {
                                 enemies.getWorld().playEffect(enemies.getLocation(), Effect.BONE_MEAL_USE, 12);
                                 ((LivingEntity) enemies).damage(e.getDamage() / 2, p);
-                                if (!enemies.hasMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR")) {
-                                    enemies.setMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR", new FixedMetadataValue(plugin, true));
+                                if (!enemies.hasMetadata(Constants.AfflictedBySfDrugsRobotArmor)) {
+                                    enemies.setMetadata(Constants.AfflictedBySfDrugsRobotArmor, new FixedMetadataValue(plugin, true));
                                     new BukkitRunnable() {
 
                                         @Override
                                         public void run() {
                                             // TODO Auto-generated method stub
-                                            enemies.removeMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR", plugin);
+                                            enemies.removeMetadata(Constants.AfflictedBySfDrugsRobotArmor, plugin);
                                         }
 
                                     }.runTaskLater(plugin, 60L);
@@ -106,7 +92,7 @@ public class RobotArmorDamaged implements Listener {
     @EventHandler
     private void onEntityDamage(EntityDamageByEntityEvent e) {
         if (e.getEntity() != null) {
-            if (!e.getEntity().hasMetadata("AFFLICTED_BY_SFDRUGS_ROBOT_ARMOR") && (e.getEntity() instanceof Player || e.getEntity() instanceof Mob)) {
+            if (!e.getEntity().hasMetadata(Constants.AfflictedBySfDrugsRobotArmor) && (e.getEntity() instanceof Player || e.getEntity() instanceof Mob)) {
                 if (e.getEntity() instanceof Player p) {
                     this.HandlePlayer(e, p);
                 } else {
@@ -122,7 +108,7 @@ public class RobotArmorDamaged implements Listener {
     private void onPlayerItemDamage(PlayerItemDamageEvent e) {
         ItemStack item = e.getItem();
         if (SlimefunItem.getByItem(item) != null) {
-            if (item.getItemMeta().getDisplayName().contains("Corporate Security Robot")) {
+            if (item.getItemMeta().getDisplayName().contains(Constants.CorporateSecurityRobot)) {
                 RobotArmor T = (RobotArmor) SlimefunItem.getByItem(item);
                 T.ArmorDamaged(e, item, e.getDamage());
             }

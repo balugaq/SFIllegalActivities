@@ -6,15 +6,17 @@ import me.cworldstar.sfdrugs.implementations.DamageType;
 import me.cworldstar.sfdrugs.implementations.events.PlayerInventoryItemAddedEvent;
 import me.cworldstar.sfdrugs.implementations.events.PlayerInventoryItemRemovingEvent;
 import me.cworldstar.sfdrugs.implementations.items.UnstableObject;
+import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.LoreHandler;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class UnstableObjectEvent implements Listener {
             if (SlimefunItem.getByItem(item) != null && SlimefunItem.getByItem(item) instanceof UnstableObject) {
                 ItemMeta meta = item.getItemMeta();
                 List<String> oldLore = meta.getLore();
-                if (oldLore.get(oldLore.size() - 1).contains("Cooldown:")) {
+                if (oldLore.get(oldLore.size() - 1).contains(Texts.cd)) {
                     oldLore.remove(oldLore.size() - 1);
                     meta.setLore(oldLore);
                     item.setItemMeta(meta);
@@ -46,79 +48,62 @@ public class UnstableObjectEvent implements Listener {
     @EventHandler
     public void onPlayerInventoryItemAdded(PlayerInventoryItemAddedEvent e) {
         for (ItemStack item : e.getItem()) {
-            if (SlimefunItem.getByItem(item) != null && SlimefunItem.getByItem(item) instanceof UnstableObject TheUnstableObject) {
-                new Speak(e.getPlayer(), "&e&l ⚠ You have picked up an unstable object. Either dispose of it or use it. ⚠");
-                plugin.getLogger().warning(TheUnstableObject.unstable.toString());
-                item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(plugin, "Unstable"), PersistentDataType.DOUBLE, UnstableObject.getCooldown(TheUnstableObject.unstable));
+            if (SlimefunItem.getByItem(item) instanceof UnstableObject item2) {
+                new Speak(e.getPlayer(), Texts.uoe1);
+                plugin.getLogger().warning(item2.unstable.toString());
+                var u = new NamespacedKey(plugin, Constants.Unstable);
+                item.getItemMeta().getPersistentDataContainer().set(u, PersistentDataType.DOUBLE, UnstableObject.getCooldown(item2.unstable));
 
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        if (!e.getPlayer().getInventory().contains(item) || !e.getPlayer().isOnline()) {
-                            e.cancel();
-                        }
+                Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+                    if (!e.getPlayer().getInventory().contains(item) || !e.getPlayer().isOnline()) {
+                        e.cancel();
                     }
-                }.runTaskTimer(plugin, 0, 1L);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        if (!e.isCancelled()) {
-                            ItemMeta meta = item.getItemMeta();
-                            double cooldown = item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "Unstable"), PersistentDataType.DOUBLE);
+                }, 0, 1L);
+                Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+                    if (!e.isCancelled()) {
+                        ItemMeta meta = item.getItemMeta();
+                        double cooldown = meta.getPersistentDataContainer().get(u, PersistentDataType.DOUBLE);
 
-                            List<String> oldLore = meta.getLore();
-                            if (!oldLore.get(oldLore.size() - 1).contains("Cooldown:")) {
-                                oldLore.add("");
-                                oldLore.add(LoreHandler.UnstableObjectCooldownTimer(cooldown));
-                            } else {
-                                oldLore.add(oldLore.size() - 1, LoreHandler.UnstableObjectCooldownTimer(cooldown - 0.1));
-                            }
-                            meta.setLore(oldLore);
-                            item.setItemMeta(meta);
-                            item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(plugin, "Unstable"), PersistentDataType.DOUBLE, cooldown - 0.1);
+                        List<String> oldLore = meta.getLore();
+                        if (!oldLore.get(oldLore.size() - 1).contains(Texts.cd)) {
+                            oldLore.add("");
+                            oldLore.add(LoreHandler.UnstableObjectCooldownTimer(cooldown));
+                        } else {
+                            oldLore.add(oldLore.size() - 1, LoreHandler.UnstableObjectCooldownTimer(cooldown - 0.1));
                         }
+                        meta.setLore(oldLore);
+                        meta.getPersistentDataContainer().set(u, PersistentDataType.DOUBLE, cooldown - 0.1);
+                        item.setItemMeta(meta);
                     }
-                }.runTaskTimer(plugin, 0, 2L);
+                }, 0, 2L);
                 switch (item2.getUnstableAmount()) {
                     case SLIGHTLY_UNSTABLE:
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (e.getPlayer().getInventory().contains(item) && !e.isCancelled() && e.getPlayer().isOnline()) {
-                                    new Speak(e.getPlayer(), "&eYou took too long to dispose of a slightly unstable object. It has disappeared.");
-                                    item.setAmount(0);
-                                }
+                        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                            if (e.getPlayer().getInventory().contains(item) && !e.isCancelled() && e.getPlayer().isOnline()) {
+                                new Speak(e.getPlayer(), Texts.uoe2);
+                                item.setAmount(0);
                             }
-
-                        }.runTaskLater(plugin, 300L);
+                        }, 300L);
                         break;
                     case UNSTABLE:
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (e.getPlayer().getInventory().contains(item) && !e.isCancelled() && e.getPlayer().isOnline()) {
-                                    new Speak(e.getPlayer(), "&e&lYou took too long to dispose of an unstable object. It blew up.");
-                                    item.setAmount(0);
-                                    e.getPlayer().getWorld().createExplosion(e.getPlayer().getLocation(), 4F, true, true, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
-                                    e.getPlayer().damage(30.0, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
-                                }
+                        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                            if (e.getPlayer().getInventory().contains(item) && !e.isCancelled() && e.getPlayer().isOnline()) {
+                                new Speak(e.getPlayer(), Texts.uoe3);
+                                item.setAmount(0);
+                                e.getPlayer().getWorld().createExplosion(e.getPlayer().getLocation(), 4F, true, true, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
+                                e.getPlayer().damage(30.0, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
                             }
-
-                        }.runTaskLater(plugin, 300L);
+                        }, 300L);
                         break;
                     case HIGHLY_UNSTABLE:
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (e.getPlayer().getInventory().contains(item) && !e.isCancelled() && e.getPlayer().isOnline()) {
-                                    new Speak(e.getPlayer(), "&c&lYou took too long to dispose of a highly unstable object. It blew up.");
-                                    item.setAmount(0);
-                                    e.getPlayer().getWorld().createExplosion(e.getPlayer().getLocation(), 10F, true, true, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
-                                    e.getPlayer().damage(45.0, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
-                                }
+                        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                            if (e.getPlayer().getInventory().contains(item) && !e.isCancelled() && e.getPlayer().isOnline()) {
+                                new Speak(e.getPlayer(), Texts.uoe4);
+                                item.setAmount(0);
+                                e.getPlayer().getWorld().createExplosion(e.getPlayer().getLocation(), 10F, true, true, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
+                                e.getPlayer().damage(45.0, DamageType.UNSTABLE_OBJECT.damager(e.getPlayer()));
                             }
-
-                        }.runTaskLater(plugin, 200L);
+                        }, 200L);
                         break;
                     case STABLE:
                     default:

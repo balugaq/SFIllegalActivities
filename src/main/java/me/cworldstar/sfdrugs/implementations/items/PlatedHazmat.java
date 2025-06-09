@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectiveArmor;
 import io.github.thebusybiscuit.slimefun4.implementation.items.armor.SlimefunArmorPiece;
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -51,7 +52,7 @@ public class PlatedHazmat extends SlimefunArmorPiece implements ProtectiveArmor 
     @Override
     public NamespacedKey getArmorSetId() {
         // TODO Auto-generated method stub
-        return new NamespacedKey(this.plugin, "SFDRUGS_PLATED_HAZMAT");
+        return new NamespacedKey(this.plugin, Constants.SfDrugsPlatedHazmat);
     }
 
 

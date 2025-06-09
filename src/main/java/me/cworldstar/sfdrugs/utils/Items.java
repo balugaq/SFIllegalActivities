@@ -60,7 +60,7 @@ public class Items {
 
     // Materials
 
-    public static final ItemStack SFDRUGS_ITEM = new CustomItemStack(Material.SUGAR, "&d&lSFDrugs", "", "&d> Click to open");
+    public static final ItemStack SFDRUGS_ITEM = new CustomItemStack(Material.SUGAR, "&d&lSFDrugs");
     public static final SlimefunItemStack RED_PHOSPHORUS = new SlimefunItemStack("SFDRUGS_RED_PHOSPHORUS", Material.REDSTONE, "&cRed Phosphorus", "", "&c - Distilled meat juice.");
     public static final SlimefunItemStack PSEUDOEPHEDRINE = new SlimefunItemStack("SFDRUGS_PSEUDOEPHEDRINE", Material.WATER_BUCKET, "&bPseudoephedrine", "", "&b - Distilled plant juice.");
     public static final SlimefunItemStack TWELVE = new SlimefunItemStack("SFDRUGS_TWELVE", Material.FIRE_CHARGE, "&412", "", "&4- I'm not too sure where this comes from.");

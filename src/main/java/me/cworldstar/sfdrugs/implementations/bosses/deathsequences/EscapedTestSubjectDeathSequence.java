@@ -3,6 +3,7 @@ package me.cworldstar.sfdrugs.implementations.bosses.deathsequences;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.DamageType;
 import me.cworldstar.sfdrugs.utils.Speak;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,8 +12,8 @@ public class EscapedTestSubjectDeathSequence {
     public EscapedTestSubjectDeathSequence(SFDrugs plugin, LivingEntity mob) {
         for (Entity e : mob.getNearbyEntities(20, 20, 20)) {
             if (e instanceof LivingEntity) {
-                new Speak(mob, mob.getNearbyEntities(20, 20, 20), "&a&l[ Escaped Test Subject ]: ROAAAAAAAAAAR!!!!");
-                new Speak(mob, mob.getNearbyEntities(20, 20, 20), "&aThe Escaped Test Subject is detonating. You have 5 seconds to run.");
+                new Speak(mob, mob.getNearbyEntities(20, 20, 20), Texts.etsds_1);
+                new Speak(mob, mob.getNearbyEntities(20, 20, 20), Texts.etsds_2);
                 new BukkitRunnable() {
                     @Override
                     public void run() {

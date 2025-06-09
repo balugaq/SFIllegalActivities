@@ -1,6 +1,7 @@
 package me.cworldstar.sfdrugs.dimensions;
 
 import me.cworldstar.sfdrugs.SFDrugs;
+import me.cworldstar.sfdrugs.utils.Constants;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,7 @@ public class DimensionGenerationHandler implements Listener {
 
     @EventHandler
     public void CorporateDimensionBuildingHandler(ChunkLoadEvent e) {
-        if (e.getWorld().getName().equals("corporate_dimension")) {
+        if (e.getWorld().getName().equals(Constants.corporate_dimension)) {
             if (e.isNewChunk() && e.getChunk().getChunkSnapshot().getBiome(e.getChunk().getX(), 5, e.getChunk().getZ()).compareTo(Biome.WOODED_HILLS) == 0) {
                 Block FirstAirBlock = e.getWorld().getHighestBlockAt(e.getChunk().getX(), e.getChunk().getZ());
             }

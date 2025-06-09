@@ -2,6 +2,8 @@ package me.cworldstar.sfdrugs.implementations.commands;
 
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.traders.ATrader;
+import me.cworldstar.sfdrugs.utils.Constants;
+import me.cworldstar.sfdrugs.utils.Texts;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +22,7 @@ public class RefreshTraders implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = sender.getServer().getPlayer(sender.getName());
             if (p.isOp()) {
-                if (args[0].equals("all")) {
+                if (args[0].equals(Constants.all)) {
                     for (ATrader Trader : ATrader.Traders.values()) {
                         // completely reset all trading interfaces
                         Trader.getTradingInterface().PopulateInventory();
@@ -35,7 +37,7 @@ public class RefreshTraders implements CommandExecutor {
                 }
 
             } else {
-                sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Only operators may run this command!");
+                sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + Texts.cmd_rt_1);
                 return false;
             }
         }
