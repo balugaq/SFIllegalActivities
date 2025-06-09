@@ -105,7 +105,5 @@ public class Texts {
     public static final String we_2 = "&e=> You have enabled silk touch.";
     public static final String ds_1 = "&7&l[ Internal Radio ]: Blocked {0} damage."; // {0} = dmg / 2
     public static final String drug_5 = "&e&lYou feel better now.";
-
-
     public static final String CorporateHazmat = "Corporate Hazmat";
 }
