@@ -14,6 +14,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -30,11 +31,9 @@ public class CircuitFabricator extends AContainer implements RecipeDisplayItem, 
     }
 
     @Override
-    @Nonnull
-    public List<ItemStack> getDisplayRecipes() {
+    public @NotNull List<ItemStack> getDisplayRecipes() {
         return super.getDisplayRecipes();
     }
-
     @Override
     public void registerDefaultRecipes() {
         addRecipe(60, new ItemStack[]{new CustomItemStack(SlimefunItems.SILICON, 4), new CustomItemStack(SlimefunItems.REDSTONE_ALLOY, 8)}, new ItemStack[]{new CustomItemStack(SlimefunItems.BASIC_CIRCUIT_BOARD)});

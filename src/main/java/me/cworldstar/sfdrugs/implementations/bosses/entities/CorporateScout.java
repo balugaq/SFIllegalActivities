@@ -3,6 +3,7 @@ package me.cworldstar.sfdrugs.implementations.bosses.entities;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.cworldstar.sfdrugs.SFDrugs;
 import me.cworldstar.sfdrugs.implementations.bosses.entities.EntityDialog.Personality;
+import me.cworldstar.sfdrugs.implementations.loot.CorporationEnemyLootTable;
 import me.cworldstar.sfdrugs.implementations.loot.SmallerGangMemberLootTable;
 import me.cworldstar.sfdrugs.utils.Constants;
 import me.cworldstar.sfdrugs.utils.Speak;
@@ -126,7 +127,7 @@ public class CorporateScout extends BossEntity {
         z.setAdult();
         z.setCanPickupItems(false);
         z.setMetadata(Constants.SfDrugsCustomMob, new FixedMetadataValue(plugin, Constants.corporate_scout));
-        z.setLootTable(new SmallerGangMemberLootTable(plugin));
+        z.setLootTable(new CorporationEnemyLootTable(plugin));
         ItemStack ZombieHead = SlimefunUtils.getCustomHead(Constants.cs_head_1);
         ItemStack Boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         ItemMeta BootsMeta = Boots.getItemMeta();

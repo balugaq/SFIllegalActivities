@@ -735,7 +735,7 @@ public class Items {
                 null, null, null, null, null, null, new ItemStack(SlimefunItems.STEEL_INGOT), new ItemStack(SlimefunItems.STEEL_INGOT), new ItemStack(SlimefunItems.STEEL_INGOT)
         });
         NTRAY.register(this.plugin);
-        SlimefunItem METH_COMPOUND = new SlimefunItem(this.group, Items.METH_COMPOUND, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new CustomItemStack(Items.RED_PHOSPHORUS, 8), new CustomItemStack(Items.PSEUDOEPHEDRINE, 16), new CustomItemStack(Items.TWELVE, 12)});
+        SlimefunItem METH_COMPOUND = new SlimefunItem(this.group, Items.METH_COMPOUND, RecipeType.SMELTERY, new ItemStack[]{new CustomItemStack(Items.RED_PHOSPHORUS, 8), new CustomItemStack(Items.PSEUDOEPHEDRINE, 16), new CustomItemStack(Items.TWELVE, 12)});
         METH_COMPOUND.register(this.plugin);
         Dryer DRYER = new Dryer(this.group, Items.DRYER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 null, null, null, null, null, new ItemStack(SlimefunItems.STEEL_INGOT), new ItemStack(SlimefunItems.STEEL_INGOT), new ItemStack(SlimefunItems.STEEL_INGOT), new ItemStack(SlimefunItems.STEEL_INGOT)

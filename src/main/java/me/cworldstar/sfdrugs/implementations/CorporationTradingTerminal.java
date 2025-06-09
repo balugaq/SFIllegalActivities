@@ -20,6 +20,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class CorporationTradingTerminal extends CraftingBlock implements Radioactive, EnergyNetComponent {
     public CorporationTradingTerminal(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
                                       ItemStack[] recipe) {
@@ -88,5 +90,4 @@ public class CorporationTradingTerminal extends CraftingBlock implements Radioac
         // TODO Auto-generated method stub
         return (1280 * 4);
     }
-
 }

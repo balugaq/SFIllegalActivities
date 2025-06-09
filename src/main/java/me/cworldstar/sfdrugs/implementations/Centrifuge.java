@@ -10,6 +10,7 @@ import me.cworldstar.sfdrugs.utils.Items;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -24,8 +25,7 @@ public class Centrifuge extends AContainer implements RecipeDisplayItem, NotHopp
     }
 
     @Override
-    @Nonnull
-    public List<ItemStack> getDisplayRecipes() {
+    public @NotNull List<ItemStack> getDisplayRecipes() {
         return super.getDisplayRecipes();
     }
 
