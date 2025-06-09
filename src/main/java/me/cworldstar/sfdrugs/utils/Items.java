@@ -24,6 +24,7 @@ import me.cworldstar.sfdrugs.implementations.items.ArmorSet;
 import me.cworldstar.sfdrugs.implementations.items.Blueprint;
 import me.cworldstar.sfdrugs.implementations.items.DrugBaton;
 import me.cworldstar.sfdrugs.implementations.items.DrugSuit;
+import me.cworldstar.sfdrugs.implementations.items.ElectricShears;
 import me.cworldstar.sfdrugs.implementations.items.EpicChest;
 import me.cworldstar.sfdrugs.implementations.items.Hook;
 import me.cworldstar.sfdrugs.implementations.items.IrradiatedItem;
@@ -227,7 +228,6 @@ public class Items {
     public static final SlimefunItemStack HOOKER_GROUP = new SlimefunItemStack("HOOKER_GROUP", HOOKER_HEAD, "&dHooker Zombie");
     public static final SlimefunItemStack CORPORATE_GROUP = new SlimefunItemStack("CORPORATE_GROUP", CORPORATE_HEAD, "&7Corporation Trading");
     public static final MachineRecipeType CORPORATION_TRADE = new MachineRecipeType("CORPORATION_TRADER", Items.CORPORATE_GROUP);
-    public static final SlimefunItemStack CORPORATE_TRADING_TERMINAL = new SlimefunItemStack("SFDRUGS_CORPORATION_TRADING_TERMINAL", CORPORATE_HEAD, "&7Corporation Trading Terminal", "", LoreBuilder.powerPerSecond(1280), "", LoreBuilder.radioactive(Radioactivity.MODERATE), LoreBuilder.HAZMAT_SUIT_REQUIRED, "", LoreBuilder.RIGHT_CLICK_TO_OPEN);
     public static final SlimefunItemStack CORPORATE_ANDROID_CORE = new SlimefunItemStack("SFDRUGS_CORPORATION_ANDROID_CORE", CORPORATE_ANDROID_CORE_HEAD, "&5&lCorporate Android Core", "&5⇒ Made from re&5&ka&r&5l &5&kdark&r &5m&5&katter&r!", "", "&e&l⚠ Warning! Highly Unstable! ⚠");
     public static final SlimefunItemStack ELECTRIC_SHEARS = new SlimefunItemStack("SFDRUGS_ELECTRIC_SHEARS", Material.SHEARS, "&7Electric Shears", "", LoreBuilder.powerCharged(0, 1280), "", LoreBuilder.radioactive(Radioactivity.LOW));
     public static final SlimefunItemStack UNCOMMON_CHEST = new SlimefunItemStack(
@@ -520,7 +520,7 @@ public class Items {
         Synth.energyPerTick(100);
         Synth.register(this.plugin);
         new Hook(this.plugin, this.group, new SlimefunItemStack("SFDRUGS_GANGSTER_HOOK", Material.CHAIN, "&cRed Wolves' Hook & Chain", "", LoreBuilder.RIGHT_CLICK_TO_USE), SECURITY_ROBOT_DROP, new ItemStack[]{}).register(this.plugin);
-        new SlimefunItem(this.group, Items.ELECTRIC_SHEARS, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+        new ElectricShears(this.group, Items.ELECTRIC_SHEARS, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 new ItemStack(Material.SHEARS), new CustomItemStack(SlimefunItems.BATTERY)
         }).register(this.plugin);
 
@@ -549,7 +549,7 @@ public class Items {
                 new CustomItemStack(Items.MONEY, 16)
         }).register(this.plugin);
 
-        new LaserSword(this.group, Items.CORPORATION_LASER_SWORD, Items.CORPORATION_TRADE, new ItemStack[]{
+        new LaserSword(this.group, Items.CORPORATION_LASER_SWORD, CORPORATION_TRADE, new ItemStack[]{
 
                 null, null, null,
                 SlimefunItems.REINFORCED_PLATE, Items.IRRADIATED_SIRTHIUM_RAW, SlimefunItems.REINFORCED_PLATE,
@@ -565,11 +565,7 @@ public class Items {
         new SlimefunItem(this.group, Items.DRUG_PIPE, HOOKER_TRADE, new ItemStack[]{
                 new CustomItemStack(Items.METH, 10)
         }).register(this.plugin);
-        new CorporationTradingTerminal(this.group, Items.CORPORATE_TRADING_TERMINAL, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                null, SlimefunItems.REINFORCED_PLATE, null,
-                SlimefunItems.ADVANCED_CIRCUIT_BOARD, Items.CORPORATE_ANDROID_CORE, SlimefunItems.REINFORCED_PLATE,
-                SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_PLATE
-        }).register(this.plugin);
+
         new RobotArmorSet(this.plugin, this.invisibleItems, new SlimefunItemStack[]{
                 Items.CORPORATION_ROBOT_HELMET,
                 Items.CORPORATION_ROBOT_CHESTPLATE,
@@ -747,6 +743,13 @@ public class Items {
                 new ItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT), new ItemStack(SlimefunItems.REINFORCED_PLATE), new ItemStack(SlimefunItems.REINFORCED_ALLOY_INGOT)
         });
         CENTRIFUGE.register(this.plugin);
+
+        SlimefunItemStack CORPORATE_TRADING_TERMINAL = new SlimefunItemStack("SFDRUGS_CORPORATION_TRADING_TERMINAL", CORPORATE_HEAD, "&7Corporation Trading Terminal", "", LoreBuilder.powerPerSecond(1280), "", LoreBuilder.radioactive(Radioactivity.MODERATE), LoreBuilder.HAZMAT_SUIT_REQUIRED, "", LoreBuilder.RIGHT_CLICK_TO_OPEN);
+        new CorporationTradingTerminal(this.group, CORPORATE_TRADING_TERMINAL, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                null, SlimefunItems.REINFORCED_PLATE, null,
+                SlimefunItems.ADVANCED_CIRCUIT_BOARD, Items.CORPORATE_ANDROID_CORE, SlimefunItems.REINFORCED_PLATE,
+                SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_PLATE
+        }).register(this.plugin);
     }
 
 }
