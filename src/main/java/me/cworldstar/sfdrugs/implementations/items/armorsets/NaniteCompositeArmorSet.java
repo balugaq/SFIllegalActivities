@@ -4,7 +4,5 @@ import org.bukkit.event.Listener;
 
 public class NaniteCompositeArmorSet implements Listener {
 
-	
-	
-	
+
 }

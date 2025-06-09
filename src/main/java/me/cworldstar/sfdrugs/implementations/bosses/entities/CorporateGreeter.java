@@ -4,8 +4,8 @@ import me.cworldstar.sfdrugs.implementations.traders.ATrader;
 
 public class CorporateGreeter extends ATrader {
 
-	public CorporateGreeter() {
-		super("corporate_greeter");
-	}
+    public CorporateGreeter() {
+        super("corporate_greeter");
+    }
 
 }

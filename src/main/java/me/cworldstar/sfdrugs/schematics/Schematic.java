@@ -1,14 +1,5 @@
 package me.cworldstar.sfdrugs.schematics;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.logging.Level;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 /*
  *
  * This class is free software: you can redistribute it and/or modify
